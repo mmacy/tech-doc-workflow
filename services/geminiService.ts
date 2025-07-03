@@ -3,10 +3,10 @@ import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { GEMINI_MODEL_TEXT, PROMPT_SYSTEM_INSTRUCTION } from '../constants';
 import { ReviewDecision } from "../types";
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.GEMINI_API_KEY;
 
 if (!API_KEY) {
-  throw new Error("API_KEY environment variable not set. Please set it in your environment.");
+  throw new Error("GEMINI_API_KEY environment variable not set. Please set it in your environment.");
 }
 
 const ai = new GoogleGenAI({ apiKey: API_KEY });
@@ -31,7 +31,7 @@ const generateText = async (prompt: string): Promise<string> => {
       // e.g., error.response.data or similar for more detailed messages.
       const geminiError = error as any; // Cast to any to check for specific properties
       if (geminiError.message && geminiError.message.includes('API key not valid')) {
-         throw new Error("Invalid API Key. Please check your API_KEY environment variable.");
+         throw new Error("Invalid API Key. Please check your GEMINI_API_KEY environment variable.");
       }
       if (geminiError.message && geminiError.message.includes('quota')) {
         throw new Error("API quota exceeded. Please check your Gemini project quotas.");

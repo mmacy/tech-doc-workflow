@@ -11,7 +11,7 @@ export const AGENT_CONFIGURATIONS: ReadonlyArray<AgentConfig> = [
   {
     id: AgentName.TECHNICAL_REVIEWER,
     role: AgentRole.REVIEWER,
-    description: "Reviews for technical accuracy and completeness against source materials.",
+    description: "Reviews for technical accuracy against source code.",
     defaultMaxLoops: 2,
   },
   {
@@ -37,7 +37,7 @@ export const INITIAL_AGENT_SETTINGS: AgentSettings = {
   reviewerGuidance: {
     [AgentName.INFORMATION_ARCHITECT]: "Focus on a logical flow of information for effective and efficient transfer of information. If existing documentation was provided, ensure the document fits within its information architecture, avoids duplication, and references other documents with Markdown links (even placeholder) if they would aid in understanding or learning the content in the document being authored.",
     [AgentName.TECHNICAL_EDITOR]: "Adhere to standard technical writing best practices (e.g., active voice, consistent terminology, correct grammar and punctuation). Check for overall readability and conciseness. Headers of all levels should be sentence case, list markers should have only one space between the list marker (hyphen or N.) and the list item text, and there should be blank lines surrounding headers, lists, and fenced code blocks. Advise use of Mermaid diagrams where such conent would add to understanding.",
-    [AgentName.TECHNICAL_REVIEWER]: "Verify all procedural steps, code examples, and technical claims against the provided source and supporting materials. Ensure accuracy and completeness from a technical standpoint.",
+    [AgentName.TECHNICAL_REVIEWER]: "Verify all procedural steps, code examples, and technical claims against the provided source code. Treat source code as authoritative, identifying discrepancies between source code and the document as requiring revision.",
   },
   writingStyleGuide: "",
   markdownStyleGuide: "",
@@ -358,9 +358,7 @@ const getBaseReviewerPrompt = (
 
 \`\`\`
 ${sourceContent}
-\`\`\`
-
-${supportingContent ? `Original supporting content for cross-referencing:\n\n\`\`\`\n${supportingContent}\n\`\`\`` : ''}`;
+\`\`\``;
   }
 
   let globalGuidanceSection = "";
@@ -420,5 +418,5 @@ export const getTechnicalEditorReviewPrompt = (profile: DocumentTypeProfile, doc
 };
 
 export const getTechnicalReviewerReviewPrompt = (profile: DocumentTypeProfile, documentContent: string, sourceContent: string, supportingContent: string, agentSettings: AgentSettings): string => {
-  return getBaseReviewerPrompt(AgentName.TECHNICAL_REVIEWER, profile, documentContent, "technical accuracy, completeness, and consistency with the provided source and supporting materials. Verify claims, procedures, and factual statements against these materials. Treat source code as authoritative, identifying discrepancies between source code and the document as requiring revision.", agentSettings, sourceContent, supportingContent);
+  return getBaseReviewerPrompt(AgentName.TECHNICAL_REVIEWER, profile, documentContent, "technical accuracy and consistency with the provided source code. Verify claims, procedures, and factual statements against the source code. Treat source code as authoritative, identifying discrepancies between source code and the document as requiring revision.", agentSettings, sourceContent, supportingContent);
 };
