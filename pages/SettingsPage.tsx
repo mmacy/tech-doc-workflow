@@ -4,6 +4,7 @@ import { AgentSettings, DocumentTypeProfile } from '../types';
 import AgentSettingsTab from '../components/settings/AgentSettingsTab';
 import DocumentTypeProfilesTab from '../components/settings/DocumentTypeProfilesTab';
 import GlobalStyleGuideTab from '../components/settings/GlobalStyleGuideTab';
+import { LLMProviderTab } from '../components/settings/LLMProviderTab';
 import { INITIAL_AGENT_SETTINGS } from '../constants';
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -16,7 +17,7 @@ interface SettingsPageProps {
   disabled: boolean; // True if main workflow is processing
 }
 
-type SettingsTab = 'agents' | 'profiles' | 'globalStyle';
+type SettingsTab = 'agents' | 'profiles' | 'globalStyle' | 'llmProvider';
 
 const SettingsPage: React.FC<SettingsPageProps> = ({
   agentSettings,
@@ -26,7 +27,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
   onBackToMain,
   disabled
 }) => {
-  const [activeTab, setActiveTab] = useState<SettingsTab>('agents');
+  const [activeTab, setActiveTab] = useState<SettingsTab>('llmProvider');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [confirmModalProps, setConfirmModalProps] = useState({
@@ -192,6 +193,16 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
         <div className="mb-6 border-b border-slate-700">
           <nav className="-mb-px flex space-x-4" aria-label="Tabs">
             <button
+              onClick={() => setActiveTab('llmProvider')}
+              className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
+                ${activeTab === 'llmProvider'
+                  ? 'border-sky-500 text-sky-400'
+                  : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
+                }`}
+            >
+              LLM Provider
+            </button>
+            <button
               onClick={() => setActiveTab('agents')}
               className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
                 ${activeTab === 'agents'
@@ -225,6 +236,14 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
         </div>
 
         <div>
+          {activeTab === 'llmProvider' && (
+            <LLMProviderTab
+              provider={agentSettings.llmProvider}
+              onProviderChange={(provider) => 
+                onAgentSettingsChange({ ...agentSettings, llmProvider: provider })
+              }
+            />
+          )}
           {activeTab === 'agents' && (
             <AgentSettingsTab
               settings={agentSettings}

@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { AgentName, AgentRole, AgentStatus, WorkflowLog, AgentSettings, AgentRuntimeState, ReviewDecision, ReviewFeedbackEntry, DocumentTypeProfile, View } from './types';
 import { AGENT_CONFIGURATIONS, INITIAL_AGENT_SETTINGS, INITIAL_DOCUMENT_TYPE_PROFILES, getTechnicalWriterInitialPrompt, getTechnicalWriterRevisionPrompt, getInformationArchitectReviewPrompt, getTechnicalEditorReviewPrompt, getTechnicalReviewerReviewPrompt } from './constants';
-import { callGeminiTextGeneration, callGeminiReview } from './services/geminiService';
+import { callLLMTextGeneration, callLLMReview, initializeProvider, getProviderDisplayInfo } from './services/llmService';
 import DocumentInputForm from './components/DocumentInputForm';
 import WorkflowStatusLog from './components/WorkflowStatusLog';
 import DownloadButton from './components/DownloadButton';
@@ -92,6 +92,15 @@ const App: React.FC = () => {
     );
   }, [agentSettings.maxLoopsPerReviewer]);
 
+  // Initialize LLM provider when settings change
+  useEffect(() => {
+    try {
+      initializeProvider(agentSettings.llmProvider);
+    } catch (error) {
+      console.warn('Failed to initialize LLM provider:', error);
+    }
+  }, [agentSettings.llmProvider]);
+
 
   const handleFormSubmit = async () => {
     if (!selectedProfileId) {
@@ -109,7 +118,10 @@ const App: React.FC = () => {
     resetWorkflow(true); // Keep inputs for this run
     setIsProcessing(true);
     setErrorMessage(null);
-    addLog(`Workflow started for profile: "${profile.name}".`, "INFO");
+    
+    // Add workflow metadata log entry
+    const providerInfo = getProviderDisplayInfo(agentSettings.llmProvider);
+    addLog(`Workflow started for profile: "${profile.name}" | Provider: ${providerInfo.providerName} | Model: ${providerInfo.modelName}`, "INFO");
 
     let currentIterationDocument = '';
 
@@ -118,7 +130,7 @@ const App: React.FC = () => {
       updateAgentStatus(writer.id, AgentStatus.WORKING);
       addLog("Generating initial draft...", "AGENT_ACTION", writer.id);
       const writerPrompt = getTechnicalWriterInitialPrompt(profile, sourceContent, supportingContent, agentSettings);
-      currentIterationDocument = await callGeminiTextGeneration(writerPrompt);
+      currentIterationDocument = await callLLMTextGeneration(writerPrompt);
       setCurrentDocument(currentIterationDocument);
       updateAgentStatus(writer.id, AgentStatus.COMPLETED);
       addLog("Initial draft generated.", "SUCCESS", writer.id);
@@ -148,7 +160,7 @@ const App: React.FC = () => {
             reviewPrompt = getTechnicalReviewerReviewPrompt(profile, currentIterationDocument, sourceContent, supportingContent, agentSettings);
           }
 
-          const reviewDecision: ReviewDecision = await callGeminiReview(reviewPrompt);
+          const reviewDecision: ReviewDecision = await callLLMReview(reviewPrompt);
 
           if (reviewDecision.type === "CONTINUE") {
             addLog("Document approved.", "SUCCESS", reviewerConfig.id);
@@ -166,7 +178,7 @@ const App: React.FC = () => {
             updateAgentStatus(AgentName.TECHNICAL_WRITER, AgentStatus.WORKING);
             addLog("Applying revisions...", "AGENT_ACTION", AgentName.TECHNICAL_WRITER);
             const revisionPrompt = getTechnicalWriterRevisionPrompt(profile, currentIterationDocument, reviewDecision.feedback, agentSettings);
-            currentIterationDocument = await callGeminiTextGeneration(revisionPrompt);
+            currentIterationDocument = await callLLMTextGeneration(revisionPrompt);
             setCurrentDocument(currentIterationDocument);
             updateAgentStatus(AgentName.TECHNICAL_WRITER, AgentStatus.COMPLETED);
             addLog("Revisions applied by Technical Writer.", "SUCCESS", AgentName.TECHNICAL_WRITER);
@@ -296,7 +308,7 @@ const App: React.FC = () => {
 
         <div className="md:col-span-2 space-y-6">
           <div className="flex flex-col h-[50rem] gap-6">
-            <div className="h-3/4">
+            <div className="h-1/2">
                 <div className="bg-slate-800 p-6 rounded-lg shadow-lg h-full flex flex-col">
                   <h3 className="text-xl font-semibold text-slate-100 mb-4 border-b border-slate-700 pb-2 shrink-0">Role status</h3>
                   {isProcessing && !agentStates.some(a => [AgentStatus.WORKING, AgentStatus.REVIEWING].includes(a.status)) &&
@@ -314,7 +326,7 @@ const App: React.FC = () => {
                   </div>
                 </div>
             </div>
-            <div className="h-1/4">
+            <div className="h-1/2">
                 <WorkflowStatusLog logs={workflowLogs} />
             </div>
           </div>

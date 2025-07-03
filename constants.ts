@@ -1,4 +1,5 @@
 import { AgentConfig, AgentName, AgentRole, AgentSettings, DocumentTypeProfile } from './types';
+import { ProviderConfig } from './types/providers';
 
 export const GEMINI_MODEL_TEXT = 'gemini-2.5-flash-preview-04-17';
 
@@ -28,6 +29,21 @@ export const AGENT_CONFIGURATIONS: ReadonlyArray<AgentConfig> = [
   },
 ];
 
+const getDefaultProviderConfig = (): ProviderConfig => {
+  const geminiApiKey = process.env.GEMINI_API_KEY;
+  if (geminiApiKey) {
+    return {
+      type: 'gemini',
+      apiKey: geminiApiKey
+    };
+  }
+  
+  return {
+    type: 'gemini',
+    apiKey: ''
+  };
+};
+
 export const INITIAL_AGENT_SETTINGS: AgentSettings = {
   maxLoopsPerReviewer: {
     [AgentName.INFORMATION_ARCHITECT]: AGENT_CONFIGURATIONS.find(a => a.id === AgentName.INFORMATION_ARCHITECT)?.defaultMaxLoops ?? 3,
@@ -41,6 +57,7 @@ export const INITIAL_AGENT_SETTINGS: AgentSettings = {
   },
   writingStyleGuide: "",
   markdownStyleGuide: "",
+  llmProvider: getDefaultProviderConfig(),
 };
 
 export const INITIAL_DOCUMENT_TYPE_PROFILES: DocumentTypeProfile[] = [
