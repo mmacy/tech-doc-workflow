@@ -1,0 +1,6 @@
+{
+  "name": "Doc Authoring Studio 0.1.1",
+  "description": "A multi-role, loop-enabled application for authoring technical documentation from rough source content to publish-ready Markdown.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
