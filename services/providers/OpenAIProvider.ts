@@ -1,18 +1,22 @@
 import OpenAI from 'openai';
 import { LLMProvider, ProviderConfig } from '../../types/providers';
 import { ReviewDecision } from "../../types";
+import { keyManager } from '../keyManager';
 
 export class OpenAIProvider implements LLMProvider {
   private client: OpenAI;
   private model: string;
 
   constructor(config: ProviderConfig) {
-    if (!config.apiKey) {
-      throw new Error("OpenAI API key is required");
+    // Try to get API key from KeyManager first, then fall back to config
+    const apiKey = keyManager.getKey('openai') || config.apiKey;
+    
+    if (!apiKey) {
+      throw new Error("OpenAI API key not configured. Please add your key in settings.");
     }
 
     this.client = new OpenAI({
-      apiKey: config.apiKey,
+      apiKey: apiKey,
       dangerouslyAllowBrowser: true,
     });
 

@@ -1,14 +1,18 @@
 import { AzureOpenAI } from 'openai';
 import { LLMProvider, ProviderConfig } from '../../types/providers';
 import { ReviewDecision } from "../../types";
+import { keyManager } from '../keyManager';
 
 export class AzureOpenAIProvider implements LLMProvider {
   private client: AzureOpenAI;
   private deployment: string;
 
   constructor(config: ProviderConfig) {
-    if (!config.apiKey) {
-      throw new Error("Azure OpenAI API key is required");
+    // Try to get API key from KeyManager first, then fall back to config
+    const apiKey = keyManager.getKey('azure') || config.apiKey;
+    
+    if (!apiKey) {
+      throw new Error("Azure OpenAI API key not configured. Please add your key in settings.");
     }
     if (!config.azureEndpoint) {
       throw new Error("Azure OpenAI endpoint is required");
@@ -18,7 +22,7 @@ export class AzureOpenAIProvider implements LLMProvider {
     }
 
     this.client = new AzureOpenAI({
-      apiKey: config.apiKey,
+      apiKey: apiKey,
       apiVersion: config.azureApiVersion || '2024-10-01-preview',
       endpoint: config.azureEndpoint,
       dangerouslyAllowBrowser: true,

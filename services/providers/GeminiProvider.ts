@@ -1,17 +1,21 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { LLMProvider, ProviderConfig } from '../../types/providers';
 import { ReviewDecision } from "../../types";
+import { keyManager } from '../keyManager';
 
 export class GeminiProvider implements LLMProvider {
   private ai: GoogleGenAI;
   private model: string;
 
   constructor(config: ProviderConfig) {
-    if (!config.apiKey) {
-      throw new Error("Gemini API key is required");
+    // Try to get API key from KeyManager first, then fall back to config
+    const apiKey = keyManager.getKey('gemini') || config.apiKey;
+    
+    if (!apiKey) {
+      throw new Error("Gemini API key not configured. Please add your key in settings.");
     }
     
-    this.ai = new GoogleGenAI({ apiKey: config.apiKey });
+    this.ai = new GoogleGenAI({ apiKey: apiKey });
     this.model = 'gemini-2.5-flash-preview-04-17'; // Default model
   }
 

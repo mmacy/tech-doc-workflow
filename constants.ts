@@ -31,7 +31,7 @@ export const AGENT_CONFIGURATIONS: ReadonlyArray<AgentConfig> = [
 
 const getDefaultProviderConfig = (): ProviderConfig => {
   // Check for environment variables in order of preference
-  
+
   // OpenAI
   const openaiApiKey = process.env.OPENAI_API_KEY;
   if (openaiApiKey) {
@@ -41,7 +41,7 @@ const getDefaultProviderConfig = (): ProviderConfig => {
       model: 'gpt-4o'
     };
   }
-  
+
   // Azure OpenAI
   const azureApiKey = process.env.AZURE_OPENAI_API_KEY;
   const azureEndpoint = process.env.AZURE_OPENAI_ENDPOINT;
@@ -55,7 +55,7 @@ const getDefaultProviderConfig = (): ProviderConfig => {
       azureApiVersion: process.env.AZURE_OPENAI_API_VERSION || '2024-10-01-preview'
     };
   }
-  
+
   // Gemini (fallback)
   const geminiApiKey = process.env.GEMINI_API_KEY;
   if (geminiApiKey) {
@@ -64,7 +64,7 @@ const getDefaultProviderConfig = (): ProviderConfig => {
       apiKey: geminiApiKey
     };
   }
-  
+
   // Default to Gemini with empty key (requires manual configuration)
   return {
     type: 'gemini',
@@ -326,29 +326,29 @@ ${profile.docTypeDescription.trim() ? `Guidance on writing for this document typ
 ${profile.docTypeDescription}
 </doc_type_guidance>
 ` : ''}
-  ${profile.template ? `Template/structure to use as a guideline (adapt as needed, fill in placeholders like {{TITLE}} or remove if not applicable for the content):
+  ${profile.template ? `Template to adhere to while writing or revising this document:
 
   \`\`\`markdown
   ${profile.template}
   \`\`\`` : "No specific template provided, generate a standard structure for this document type."}
 
-Source content (primary material for the document):
+Existing document, draft, or other content serving as the source material for the document:
 
 \`\`\`
 ${sourceContent}
 \`\`\`
 
-Supporting content (additional context, code examples, existing related docs):
+Authoritative source code or other content serving as the source of truth against which the document's claims and content should be compared:
 
 \`\`\`
 ${supportingContent || "No supporting content provided."}
 \`\`\`
 
-Based on all the provided information, write a comprehensive, clear, and well-structured document titled appropriately for its content, fitting the profile of a "${profile.name}". Ensure the output is in Markdown format.
+Based on all the provided information, write or revise a comprehensive, clear, and well-structured document titled appropriately for its content, fitting the profile of a "${profile.name}". Ensure the output is in Markdown format and NOT enclosed in tripel-backtick code fencing.
 
 Focus on fulfilling the purpose of a ${profile.name} as described.
 
-Output ONLY the Markdown content for the document. Do not include any preambles or explanations outside the Markdown.`;
+Output ONLY the Markdown content for the document. Do not include any preambles or explanations outside the Markdown and do NOT enclose the document it in code fences.`;
 };
 
 export const getTechnicalWriterRevisionPrompt = (
@@ -385,7 +385,7 @@ ${feedback}
 
 Carefully consider the feedback and apply the necessary changes to the document. Ensure the revised output is in Markdown format.
 
-Output ONLY the revised Markdown content for the document. Do not include any preambles or explanations outside the Markdown.`;
+Output ONLY the revised Markdown content for the document. Do not include any preambles or explanations outside the Markdown. Do NOT enclose the document itself in code fencing.`;
 };
 
 const getBaseReviewerPrompt = (

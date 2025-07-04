@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ProviderConfig, ProviderType, PROVIDER_CONFIGS, ProviderConfigField } from '../../types/providers';
 import { ProviderFactory } from '../../services/ProviderFactory';
+import { KeyManagement } from '../KeyManagement';
 
 interface LLMProviderTabProps {
   provider: ProviderConfig;
@@ -67,6 +68,14 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
         <p className="text-gray-600 mb-6">
           Choose and configure the AI provider for text generation and document review.
         </p>
+      </div>
+
+      {/* Key Management Section */}
+      <div className="border-b pb-6">
+        <KeyManagement onKeysUpdated={() => {
+          // Optionally refresh test results when keys are updated
+          setTestResult(null);
+        }} />
       </div>
 
       <div className="space-y-4">
