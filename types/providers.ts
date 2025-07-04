@@ -42,7 +42,7 @@ export const PROVIDER_CONFIGS: Record<ProviderType, ProviderInfo> = {
     configFields: [
       {
         key: 'apiKey',
-        label: 'API Key',
+        label: 'API key',
         type: 'password',
         required: true,
         placeholder: 'Enter your Gemini API key',
@@ -73,7 +73,7 @@ export const PROVIDER_CONFIGS: Record<ProviderType, ProviderInfo> = {
       },
       {
         key: 'azureDeployment',
-        label: 'Deployment Name',
+        label: 'Deployment name',
         type: 'text',
         required: true,
         placeholder: 'gpt-4.1-nano',
@@ -81,7 +81,7 @@ export const PROVIDER_CONFIGS: Record<ProviderType, ProviderInfo> = {
       },
       {
         key: 'azureApiVersion',
-        label: 'API cersion',
+        label: 'API Version',
         type: 'text',
         required: false,
         placeholder: '2024-12-01-preview',

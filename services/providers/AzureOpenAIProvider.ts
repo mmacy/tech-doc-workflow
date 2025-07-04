@@ -59,7 +59,7 @@ export class AzureOpenAIProvider implements LLMProvider {
       if (error instanceof Error) {
         const azureError = error as any;
         if (azureError.status === 401) {
-          throw new Error("Invalid API Key.");
+          throw new Error("Invalid API key.");
         }
         if (azureError.status === 429) {
           throw new Error("API quota exceeded.");

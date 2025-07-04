@@ -200,7 +200,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
                 }`}
             >
-              LLM provider
+              LLM providers
             </button>
             <button
               onClick={() => setActiveTab('agents')}
@@ -220,7 +220,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
                 }`}
             >
-              Document type profiles
+              Doc type profiles
             </button>
              <button
               onClick={() => setActiveTab('globalStyle')}

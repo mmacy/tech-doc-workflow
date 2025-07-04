@@ -64,7 +64,7 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium mb-4">LLM providers</h3>
+        <h3 className="text-lg font-medium mb-4">LLM provider configuration</h3>
         <p className="text-gray-600 mb-6">
           Choose and configure the AI provider for text generation and document review.
         </p>

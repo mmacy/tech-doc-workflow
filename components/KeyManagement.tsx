@@ -54,11 +54,11 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
             </svg>
             <div className="flex-1">
               <h4 className="font-medium text-amber-900 mb-1">
-                Bring Your Own Keys (BYOK) - Security Notice
+                Bring Your Own Keys (BYOK) - WARNING!
               </h4>
               <ul className="text-sm text-amber-800 space-y-1">
-                <li>• This is an internal tool - use development/test keys only</li>
-                <li>• Keys are stored in memory and cleared when you close this tab</li>
+                <li>• Use development/test keys only</li>
+                <li>• Keys are stored in memory and cleared when you close this browser tab</li>
                 <li>• Never share screenshots showing your API keys</li>
                 <li>• We recommend using restricted keys with minimal permissions</li>
               </ul>
@@ -117,7 +117,7 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
 
       {/* Key Input Form */}
       <div className="space-y-4">
-        <h4 className="font-medium">Add API Keys</h4>
+        <h4 className="font-medium">Add API keys</h4>
         {providers.map((provider) => {
           const hasKey = currentKeys.some(k => k.provider === provider.id);
           if (hasKey) return null;
@@ -125,7 +125,7 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
           return (
             <div key={provider.id} className="space-y-2">
               <label className="block text-sm font-medium">
-                {provider.name} API Key
+                {provider.name} API key
               </label>
               <div className="flex space-x-2">
                 <div className="flex-1 relative">
