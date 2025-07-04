@@ -124,7 +124,7 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
 
           {testResult && (
             <div className="mt-3 p-3 rounded-md bg-gray-50 border">
-              <p className="text-sm">{testResult}</p>
+              <p className="text-sm text-gray-900">{testResult}</p>
             </div>
           )}
         </div>
