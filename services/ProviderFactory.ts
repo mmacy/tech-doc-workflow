@@ -13,7 +13,7 @@ export class ProviderFactory {
       case 'openai':
         return new OpenAIProvider(config);
       default:
-        throw new Error(`Unsupported provider type: ${config.type}`);
+        throw new Error(`Unsupported provider: ${config.type}`);
     }
   }
 
@@ -21,7 +21,7 @@ export class ProviderFactory {
     const errors: string[] = [];
 
     if (!config.type) {
-      errors.push('Provider type is required');
+      errors.push('Provider is required');
       return errors;
     }
 
@@ -48,7 +48,7 @@ export class ProviderFactory {
         }
         break;
       default:
-        errors.push(`Unsupported provider type: ${config.type}`);
+        errors.push(`Unsupported provider: ${config.type}`);
     }
 
     return errors;

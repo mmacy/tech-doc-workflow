@@ -10,11 +10,11 @@ export class GeminiProvider implements LLMProvider {
   constructor(config: ProviderConfig) {
     // Try to get API key from KeyManager first, then fall back to config
     const apiKey = keyManager.getKey('gemini') || config.apiKey;
-    
+
     if (!apiKey) {
       throw new Error("Gemini API key not configured. Please add your key in settings.");
     }
-    
+
     this.ai = new GoogleGenAI({ apiKey: apiKey });
     this.model = 'gemini-2.5-flash-preview-04-17'; // Default model
   }
@@ -26,7 +26,7 @@ export class GeminiProvider implements LLMProvider {
         contents: prompt,
         config: {
           systemInstruction: systemInstruction,
-          temperature: 0.5,
+          temperature: 1.0,
           topK: 32,
           topP: 0.9,
         }
@@ -37,10 +37,10 @@ export class GeminiProvider implements LLMProvider {
       if (error instanceof Error) {
         const geminiError = error as any;
         if (geminiError.message && geminiError.message.includes('API key not valid')) {
-          throw new Error("Invalid API Key. Please check your Gemini API key.");
+          throw new Error("Invalid API key. Check your Gemini API key.");
         }
         if (geminiError.message && geminiError.message.includes('quota')) {
-          throw new Error("API quota exceeded. Please check your Gemini project quotas.");
+          throw new Error("API quota exceeded. Check your Gemini project quotas.");
         }
       }
       throw new Error(`Failed to generate text using Gemini API: ${(error as Error).message}`);

@@ -10,7 +10,7 @@ export class OpenAIProvider implements LLMProvider {
   constructor(config: ProviderConfig) {
     // Try to get API key from KeyManager first, then fall back to config
     const apiKey = keyManager.getKey('openai') || config.apiKey;
-    
+
     if (!apiKey) {
       throw new Error("OpenAI API key not configured. Please add your key in settings.");
     }
@@ -20,7 +20,7 @@ export class OpenAIProvider implements LLMProvider {
       dangerouslyAllowBrowser: true,
     });
 
-    this.model = config.model || 'gpt-4o';
+    this.model = config.model || 'gpt-4.1-nano';
   }
 
   async generateText(prompt: string, systemInstruction?: string): Promise<string> {
@@ -51,13 +51,13 @@ export class OpenAIProvider implements LLMProvider {
       if (error instanceof Error) {
         const openaiError = error as any;
         if (openaiError.status === 401) {
-          throw new Error("Invalid API Key. Please check your OpenAI API key.");
+          throw new Error("Invalid API key. Check your OpenAI API key.");
         }
         if (openaiError.status === 429) {
-          throw new Error("API quota exceeded. Please check your OpenAI quotas.");
+          throw new Error("API quota exceeded. Check your OpenAI quotas.");
         }
         if (openaiError.status === 404) {
-          throw new Error("Model not found. Please check your OpenAI model name.");
+          throw new Error("Model not found. Check your OpenAI model name.");
         }
       }
       throw new Error(`Failed to generate text using OpenAI API: ${(error as Error).message}`);

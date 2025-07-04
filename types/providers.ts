@@ -46,45 +46,45 @@ export const PROVIDER_CONFIGS: Record<ProviderType, ProviderInfo> = {
         type: 'password',
         required: true,
         placeholder: 'Enter your Gemini API key',
-        description: 'Your Google AI Studio API key'
+        description: 'Google AI Studio API key'
       }
     ]
   },
   'azure-openai': {
     type: 'azure-openai',
     name: 'Azure OpenAI',
-    description: 'OpenAI models hosted on Microsoft Azure',
+    description: 'Azure OpenAI service',
     configFields: [
       {
         key: 'azureEndpoint',
-        label: 'Azure Endpoint',
+        label: 'Azure endpoint',
         type: 'url',
         required: true,
         placeholder: 'https://your-resource.openai.azure.com',
-        description: 'Your Azure OpenAI endpoint URL'
+        description: 'Azure OpenAI endpoint URL'
       },
       {
         key: 'apiKey',
-        label: 'API Key',
+        label: 'API key',
         type: 'password',
         required: true,
         placeholder: 'Enter your Azure OpenAI API key',
-        description: 'Your Azure OpenAI API key'
+        description: 'Azure OpenAI API key'
       },
       {
         key: 'azureDeployment',
         label: 'Deployment Name',
         type: 'text',
         required: true,
-        placeholder: 'gpt-4',
-        description: 'Your Azure OpenAI deployment name'
+        placeholder: 'gpt-4.1-nano',
+        description: 'Azure OpenAI deployment name'
       },
       {
         key: 'azureApiVersion',
-        label: 'API Version',
+        label: 'API cersion',
         type: 'text',
         required: false,
-        placeholder: '2024-10-01-preview',
+        placeholder: '2024-12-01-preview',
         description: 'Azure OpenAI API version (optional)'
       }
     ]
@@ -92,23 +92,23 @@ export const PROVIDER_CONFIGS: Record<ProviderType, ProviderInfo> = {
   openai: {
     type: 'openai',
     name: 'OpenAI',
-    description: 'OpenAI\'s GPT models',
+    description: 'OpenAI',
     configFields: [
       {
         key: 'apiKey',
-        label: 'API Key',
+        label: 'API key',
         type: 'password',
         required: true,
         placeholder: 'Enter your OpenAI API key',
-        description: 'Your OpenAI API key'
+        description: 'OpenAI API key'
       },
       {
         key: 'model',
         label: 'Model',
         type: 'text',
         required: false,
-        placeholder: 'gpt-4o',
-        description: 'OpenAI model to use (optional)'
+        placeholder: 'gpt-4.1-nano',
+        description: 'OpenAI model'
       }
     ]
   }

@@ -142,7 +142,7 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
                       }
                     }}
                     placeholder={provider.placeholder}
-                    className={`block w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`block w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900 placeholder-gray-500 ${
                       errors[provider.id] ? 'border-red-500' : 'border-gray-300'
                     }`}
                   />
