@@ -98,6 +98,7 @@ const App: React.FC = () => {
       initializeProvider(agentSettings.llmProvider);
     } catch (error) {
       console.warn('Failed to initialize LLM provider:', error);
+      setErrorMessage(`Failed to initialize LLM provider: ${(error as Error).message}`);
     }
   }, [agentSettings.llmProvider]);
 
@@ -307,17 +308,17 @@ const App: React.FC = () => {
         </div>
 
         <div className="md:col-span-2 space-y-6">
-          <div className="flex flex-col h-[50rem] gap-6">
-            <div className="h-1/2">
-                <div className="bg-slate-800 p-6 rounded-lg shadow-lg h-full flex flex-col">
-                  <h3 className="text-xl font-semibold text-slate-100 mb-4 border-b border-slate-700 pb-2 shrink-0">Role status</h3>
+          <div className="flex flex-col h-[75rem] gap-6">
+            <div className="flex-shrink-0">
+                <div className="bg-slate-800 p-6 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-semibold text-slate-100 mb-4 border-b border-slate-700 pb-2">Role status</h3>
                   {isProcessing && !agentStates.some(a => [AgentStatus.WORKING, AgentStatus.REVIEWING].includes(a.status)) &&
                   !workflowLogs.some(log => log.message.includes("Workflow started")) && (
                       <div className="flex items-center justify-center p-4 text-slate-400">
                           <Spinner size="md" /> <span className="ml-3">Initializing workflow...</span>
                       </div>
                   )}
-                  <div className="space-y-3 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800 flex-grow">
+                  <div className="space-y-3">
                     {agentStates.map((agentState) => (
                       <div key={agentState.id} data-active-agent={[AgentStatus.WORKING, AgentStatus.REVIEWING].includes(agentState.status) ? 'true': 'false'}>
                           <AgentCard agentState={agentState} />
@@ -326,7 +327,7 @@ const App: React.FC = () => {
                   </div>
                 </div>
             </div>
-            <div className="h-1/2">
+            <div className="flex-grow min-h-0">
                 <WorkflowStatusLog logs={workflowLogs} />
             </div>
           </div>

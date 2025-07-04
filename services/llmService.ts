@@ -3,6 +3,7 @@ import { ReviewDecision } from '../types';
 import { ProviderFactory } from './ProviderFactory';
 
 let currentProvider: LLMProvider | null = null;
+let currentProviderConfig: ProviderConfig | null = null;
 
 export const initializeProvider = (config: ProviderConfig): void => {
   const errors = ProviderFactory.validateConfig(config);
@@ -11,6 +12,7 @@ export const initializeProvider = (config: ProviderConfig): void => {
   }
   
   currentProvider = ProviderFactory.createProvider(config);
+  currentProviderConfig = config;
 };
 
 export const getDefaultProviderConfig = (): ProviderConfig => {
@@ -28,56 +30,37 @@ export const getDefaultProviderConfig = (): ProviderConfig => {
 };
 
 export const callLLMTextGeneration = async (prompt: string, systemInstruction?: string): Promise<string> => {
-  if (!currentProvider) {
-    // Try to initialize with default config
-    try {
-      const defaultConfig = getDefaultProviderConfig();
-      initializeProvider(defaultConfig);
-    } catch (error) {
-      throw new Error('No LLM provider configured. Please configure a provider in settings.');
-    }
+  if (!currentProvider || !currentProviderConfig) {
+    throw new Error('No LLM provider configured. Please configure a provider in settings.');
   }
   
-  if (!currentProvider) {
-    throw new Error('Failed to initialize LLM provider');
+  try {
+    return await currentProvider.generateText(prompt, systemInstruction);
+  } catch (error) {
+    const providerInfo = getProviderDisplayInfo(currentProviderConfig);
+    throw new Error(`Failed to generate text using ${providerInfo.providerName} (${providerInfo.modelName}): ${(error as Error).message}`);
   }
-  
-  return currentProvider.generateText(prompt, systemInstruction);
 };
 
 export const callLLMReview = async (prompt: string, systemInstruction?: string): Promise<ReviewDecision> => {
-  if (!currentProvider) {
-    // Try to initialize with default config
-    try {
-      const defaultConfig = getDefaultProviderConfig();
-      initializeProvider(defaultConfig);
-    } catch (error) {
-      throw new Error('No LLM provider configured. Please configure a provider in settings.');
-    }
+  if (!currentProvider || !currentProviderConfig) {
+    throw new Error('No LLM provider configured. Please configure a provider in settings.');
   }
   
-  if (!currentProvider) {
-    throw new Error('Failed to initialize LLM provider');
+  try {
+    return await currentProvider.generateReviewDecision(prompt, systemInstruction);
+  } catch (error) {
+    const providerInfo = getProviderDisplayInfo(currentProviderConfig);
+    throw new Error(`Failed to generate review using ${providerInfo.providerName} (${providerInfo.modelName}): ${(error as Error).message}`);
   }
-  
-  return currentProvider.generateReviewDecision(prompt, systemInstruction);
 };
 
 export const getCurrentProviderInfo = (): { providerName: string; modelName: string } => {
-  if (!currentProvider) {
-    // Try to initialize with default config to get provider info
-    try {
-      const defaultConfig = getDefaultProviderConfig();
-      return getProviderDisplayInfo(defaultConfig);
-    } catch (error) {
-      return { providerName: 'Not configured', modelName: 'Unknown' };
-    }
+  if (!currentProviderConfig) {
+    return { providerName: 'Not configured', modelName: 'Unknown' };
   }
   
-  // If we have a current provider, we need to get its config somehow
-  // For now, we'll try to get it from the current settings
-  // This is a bit hacky but works for our use case
-  return { providerName: 'Current Provider', modelName: 'Active Model' };
+  return getProviderDisplayInfo(currentProviderConfig);
 };
 
 export const getProviderDisplayInfo = (config: ProviderConfig): { providerName: string; modelName: string } => {

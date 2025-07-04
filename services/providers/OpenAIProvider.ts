@@ -10,29 +10,30 @@ export class OpenAIProvider implements LLMProvider {
     if (!config.apiKey) {
       throw new Error("OpenAI API key is required");
     }
-    
+
     this.client = new OpenAI({
       apiKey: config.apiKey,
+      dangerouslyAllowBrowser: true,
     });
-    
+
     this.model = config.model || 'gpt-4o';
   }
 
   async generateText(prompt: string, systemInstruction?: string): Promise<string> {
     try {
       const messages: any[] = [];
-      
+
       if (systemInstruction) {
         messages.push({ role: 'system', content: systemInstruction });
       }
-      
+
       messages.push({ role: 'user', content: prompt });
 
       const response = await this.client.chat.completions.create({
         model: this.model,
         messages: messages,
-        temperature: 0.5,
-        max_tokens: 4000,
+        temperature: 1.0,
+        max_completion_tokens: 15000,
       });
 
       const content = response.choices[0]?.message?.content;

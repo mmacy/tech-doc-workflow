@@ -16,31 +16,32 @@ export class AzureOpenAIProvider implements LLMProvider {
     if (!config.azureDeployment) {
       throw new Error("Azure OpenAI deployment name is required");
     }
-    
+
     this.client = new AzureOpenAI({
       apiKey: config.apiKey,
       apiVersion: config.azureApiVersion || '2024-10-01-preview',
       endpoint: config.azureEndpoint,
+      dangerouslyAllowBrowser: true,
     });
-    
+
     this.deployment = config.azureDeployment;
   }
 
   async generateText(prompt: string, systemInstruction?: string): Promise<string> {
     try {
       const messages: any[] = [];
-      
+
       if (systemInstruction) {
         messages.push({ role: 'system', content: systemInstruction });
       }
-      
+
       messages.push({ role: 'user', content: prompt });
 
       const response = await this.client.chat.completions.create({
         model: this.deployment,
         messages: messages,
-        temperature: 0.5,
-        max_tokens: 4000,
+        temperature: 1.0,
+        max_completion_tokens: 15000,
       });
 
       const content = response.choices[0]?.message?.content;
