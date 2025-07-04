@@ -88,7 +88,7 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
           >
             {Object.values(PROVIDER_CONFIGS).map((config) => (
               <option key={config.type} value={config.type} className="text-gray-900 bg-white">
-                {config.name} - {config.description}
+                {config.name}
               </option>
             ))}
           </select>

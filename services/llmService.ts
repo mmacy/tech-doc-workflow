@@ -10,7 +10,7 @@ export const initializeProvider = (config: ProviderConfig): void => {
   if (errors.length > 0) {
     throw new Error(`Provider configuration errors: ${errors.join(', ')}`);
   }
-  
+
   currentProvider = ProviderFactory.createProvider(config);
   currentProviderConfig = config;
 };
@@ -24,7 +24,7 @@ export const getDefaultProviderConfig = (): ProviderConfig => {
       apiKey: geminiApiKey
     };
   }
-  
+
   // Fallback to requiring manual configuration
   throw new Error('No default provider configuration available. Please configure a provider.');
 };
@@ -33,7 +33,7 @@ export const callLLMTextGeneration = async (prompt: string, systemInstruction?: 
   if (!currentProvider || !currentProviderConfig) {
     throw new Error('No LLM provider configured. Please configure a provider in settings.');
   }
-  
+
   try {
     return await currentProvider.generateText(prompt, systemInstruction);
   } catch (error) {
@@ -46,7 +46,7 @@ export const callLLMReview = async (prompt: string, systemInstruction?: string):
   if (!currentProvider || !currentProviderConfig) {
     throw new Error('No LLM provider configured. Please configure a provider in settings.');
   }
-  
+
   try {
     return await currentProvider.generateReviewDecision(prompt, systemInstruction);
   } catch (error) {
@@ -59,31 +59,31 @@ export const getCurrentProviderInfo = (): { providerName: string; modelName: str
   if (!currentProviderConfig) {
     return { providerName: 'Not configured', modelName: 'Unknown' };
   }
-  
+
   return getProviderDisplayInfo(currentProviderConfig);
 };
 
 export const getProviderDisplayInfo = (config: ProviderConfig): { providerName: string; modelName: string } => {
   switch (config.type) {
     case 'gemini':
-      return { 
-        providerName: 'Google Gemini', 
-        modelName: 'gemini-2.5-flash-preview-04-17' 
+      return {
+        providerName: 'Google Gemini',
+        modelName: 'gemini-2.5-flash-preview-04-17'
       };
     case 'azure-openai':
-      return { 
-        providerName: 'Azure OpenAI', 
-        modelName: config.azureDeployment || 'Unknown deployment' 
+      return {
+        providerName: 'Azure OpenAI',
+        modelName: config.azureDeployment || 'Unknown deployment'
       };
     case 'openai':
-      return { 
-        providerName: 'OpenAI', 
-        modelName: config.model || 'gpt-4o' 
+      return {
+        providerName: 'OpenAI',
+        modelName: config.model || 'gpt-4.1-nano'
       };
     default:
-      return { 
-        providerName: 'Unknown Provider', 
-        modelName: 'Unknown Model' 
+      return {
+        providerName: 'Unknown Provider',
+        modelName: 'Unknown Model'
       };
   }
 };

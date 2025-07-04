@@ -38,7 +38,7 @@ const getDefaultProviderConfig = (): ProviderConfig => {
     return {
       type: 'openai',
       apiKey: openaiApiKey,
-      model: 'gpt-4o'
+      model: 'gpt-4.1-nano'
     };
   }
 
