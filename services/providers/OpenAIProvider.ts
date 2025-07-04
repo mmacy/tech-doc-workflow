@@ -12,7 +12,7 @@ export class OpenAIProvider implements LLMProvider {
     const apiKey = keyManager.getKey('openai') || config.apiKey;
 
     if (!apiKey) {
-      throw new Error("OpenAI API key not configured. Please add your key in settings.");
+      throw new Error("OpenAI API key not configured - add your key in settings.");
     }
 
     this.client = new OpenAI({

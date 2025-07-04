@@ -77,7 +77,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
         try {
           const json = e.target?.result as string;
           const loadedData = JSON.parse(json);
-          
+
           const normalizeProfiles = (loadedProfiles: any): DocumentTypeProfile[] => {
              if (!Array.isArray(loadedProfiles)) return [];
              return loadedProfiles.map((p: any) => ({
@@ -93,11 +93,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           if (loadedData.documentTypeProfiles && loadedData.agentSettings) {
              if (Array.isArray(loadedData.documentTypeProfiles) && typeof loadedData.agentSettings === 'object' && loadedData.agentSettings !== null) {
                 openConfirmModal(
-                    "Confirm Settings Load",
+                    "Really load settings?",
                     "Loading from file will replace all current profiles and settings. Are you sure?",
                     () => {
                         onDocumentTypeProfilesChange(normalizeProfiles(loadedData.documentTypeProfiles));
-                        
+
                         const newAgentSettings: AgentSettings = {
                             ...INITIAL_AGENT_SETTINGS,
                             ...agentSettings,
@@ -117,18 +117,18 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
              } else {
                 alert("Invalid file format. Ensure the file contains a 'documentTypeProfiles' array and an 'agentSettings' object.");
              }
-          } 
+          }
           // Old format: [ ...profiles ]
           else if (Array.isArray(loadedData)) {
             openConfirmModal(
-                "Confirm Profile Load",
+                "Really load profile?",
                 "This appears to be an older settings file that only contains profiles. Loading it will replace all current profiles. Global style guidance and role settings will not be changed. Are you sure?",
                 () => {
                      onDocumentTypeProfilesChange(normalizeProfiles(loadedData));
                 }
             );
           } else {
-            alert("Invalid file format. Please ensure the file contains a valid array of document type profiles or the new settings structure.");
+            alert("Invalid file format. Ensure the file contains a valid array of document type profiles or the new settings structure.");
           }
         } catch (error) {
           console.error("Error loading settings:", error);
@@ -172,7 +172,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
             <p className="text-xs text-amber-400 mt-2 bg-amber-900/50 p-2 rounded-md">Some settings are disabled while the authoring workflow is processing in the main app.</p>
         )}
       </header>
-      
+
       <div className="w-full max-w-4xl mb-6 flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
         <button
           onClick={handleSaveToFile}
@@ -200,7 +200,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
                 }`}
             >
-              LLM Provider
+              LLM provider
             </button>
             <button
               onClick={() => setActiveTab('agents')}
@@ -210,7 +210,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
                 }`}
             >
-              Role Settings
+              Role settings
             </button>
             <button
               onClick={() => setActiveTab('profiles')}
@@ -220,7 +220,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
                 }`}
             >
-              Document Type Profiles
+              Document type profiles
             </button>
              <button
               onClick={() => setActiveTab('globalStyle')}
@@ -230,7 +230,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                   : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
                 }`}
             >
-              Global Style Guidance
+              Global style guidance
             </button>
           </nav>
         </div>
@@ -239,7 +239,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           {activeTab === 'llmProvider' && (
             <LLMProviderTab
               provider={agentSettings.llmProvider}
-              onProviderChange={(provider) => 
+              onProviderChange={(provider) =>
                 onAgentSettingsChange({ ...agentSettings, llmProvider: provider })
               }
             />

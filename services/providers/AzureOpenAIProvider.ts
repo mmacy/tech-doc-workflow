@@ -10,9 +10,9 @@ export class AzureOpenAIProvider implements LLMProvider {
   constructor(config: ProviderConfig) {
     // Try to get API key from KeyManager first, then fall back to config
     const apiKey = keyManager.getKey('azure') || config.apiKey;
-    
+
     if (!apiKey) {
-      throw new Error("Azure OpenAI API key not configured. Please add your key in settings.");
+      throw new Error("Azure OpenAI API key not configured - add your key in settings.");
     }
     if (!config.azureEndpoint) {
       throw new Error("Azure OpenAI endpoint is required");
@@ -59,13 +59,13 @@ export class AzureOpenAIProvider implements LLMProvider {
       if (error instanceof Error) {
         const azureError = error as any;
         if (azureError.status === 401) {
-          throw new Error("Invalid API Key. Please check your Azure OpenAI API key.");
+          throw new Error("Invalid API Key.");
         }
         if (azureError.status === 429) {
-          throw new Error("API quota exceeded. Please check your Azure OpenAI quotas.");
+          throw new Error("API quota exceeded.");
         }
         if (azureError.status === 404) {
-          throw new Error("Deployment not found. Please check your Azure OpenAI deployment name.");
+          throw new Error("Deployment not found.");
         }
       }
       throw new Error(`Failed to generate text using Azure OpenAI API: ${(error as Error).message}`);

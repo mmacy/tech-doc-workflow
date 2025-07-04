@@ -48,7 +48,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
       template: template, // Keep template as is, allow empty
     });
   };
-  
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>, setter: (value: string) => void) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -59,7 +59,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
         };
         reader.readAsText(file);
       } else {
-        alert('Please select a .txt or .md file.');
+        alert('Select a .txt or .md file.');
       }
     }
     // Reset file input to allow selecting the same file again
@@ -115,7 +115,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
                 >
                     Load from file
                 </button>
-                <input 
+                <input
                     type="file"
                     ref={docTypeDescFileInputRef}
                     onChange={(e) => handleFileSelect(e, setDocTypeDescription)}
@@ -146,7 +146,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
                 >
                     Load from file
                 </button>
-                <input 
+                <input
                     type="file"
                     ref={templateFileInputRef}
                     onChange={(e) => handleFileSelect(e, setTemplate)}

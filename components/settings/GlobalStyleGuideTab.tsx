@@ -18,7 +18,7 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
   const handleMarkdownStyleChange = (value: string) => {
     onSettingsChange({ ...settings, markdownStyleGuide: value });
   };
-  
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>, setter: (value: string) => void) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -29,7 +29,7 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
         };
         reader.readAsText(file);
       } else {
-        alert('Please select a .txt or .md file.');
+        alert('Select a .txt or .md file.');
       }
     }
     // Reset file input to allow selecting the same file again
@@ -42,7 +42,7 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-xl font-semibold text-slate-100 mb-1">Global Style Guidance</h3>
+        <h3 className="text-xl font-semibold text-slate-100 mb-1">Global style guidance</h3>
         <p className="text-sm text-slate-400">
           Define overarching style rules that apply to all document types. This guidance will be provided to all roles except the Technical Reviewer.
         </p>
@@ -62,7 +62,7 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
             >
                 Load from file
             </button>
-            <input 
+            <input
                 type="file"
                 ref={writingFileInputRef}
                 onChange={(e) => handleFileSelect(e, handleWritingStyleChange)}
@@ -95,7 +95,7 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
             >
                 Load from file
             </button>
-            <input 
+            <input
                 type="file"
                 ref={markdownFileInputRef}
                 onChange={(e) => handleFileSelect(e, handleMarkdownStyleChange)}

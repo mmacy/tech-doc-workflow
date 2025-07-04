@@ -12,7 +12,7 @@ export class GeminiProvider implements LLMProvider {
     const apiKey = keyManager.getKey('gemini') || config.apiKey;
 
     if (!apiKey) {
-      throw new Error("Gemini API key not configured. Please add your key in settings.");
+      throw new Error("Gemini API key not configured - add your key in settings.");
     }
 
     this.ai = new GoogleGenAI({ apiKey: apiKey });

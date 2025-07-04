@@ -26,12 +26,12 @@ export const getDefaultProviderConfig = (): ProviderConfig => {
   }
 
   // Fallback to requiring manual configuration
-  throw new Error('No default provider configuration available. Please configure a provider.');
+  throw new Error('No default provider configuration available - configure a provider.');
 };
 
 export const callLLMTextGeneration = async (prompt: string, systemInstruction?: string): Promise<string> => {
   if (!currentProvider || !currentProviderConfig) {
-    throw new Error('No LLM provider configured. Please configure a provider in settings.');
+    throw new Error('No LLM provider configured - configure a provider in settings.');
   }
 
   try {
@@ -44,7 +44,7 @@ export const callLLMTextGeneration = async (prompt: string, systemInstruction?: 
 
 export const callLLMReview = async (prompt: string, systemInstruction?: string): Promise<ReviewDecision> => {
   if (!currentProvider || !currentProviderConfig) {
-    throw new Error('No LLM provider configured. Please configure a provider in settings.');
+    throw new Error('No LLM provider configured. Configure a provider in settings.');
   }
 
   try {

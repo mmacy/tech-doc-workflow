@@ -37,7 +37,7 @@ const AgentSettingsTab: React.FC<AgentSettingsTabProps> = ({ settings, onSetting
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-xl font-semibold text-slate-100 mb-1">Reviewer Role Configuration</h3>
+        <h3 className="text-xl font-semibold text-slate-100 mb-1">Reviewer role configuration</h3>
         <p className="text-sm text-slate-400">
           Customize the behavior of reviewer roles in the workflow.
         </p>

@@ -106,20 +106,20 @@ const App: React.FC = () => {
   const handleFormSubmit = async () => {
     if (!selectedProfileId) {
         addLog("Error: No document type profile selected.", "ERROR");
-        setErrorMessage("Please select a document type profile.");
+        setErrorMessage("Select a document type profile.");
         return;
     }
     const profile = documentTypeProfiles.find(p => p.id === selectedProfileId);
     if (!profile) {
         addLog(`Error: Selected profile with ID ${selectedProfileId} not found.`, "ERROR");
-        setErrorMessage("Selected profile not found. Please check settings or re-select.");
+        setErrorMessage("Selected profile not found. Check settings or re-select.");
         return;
     }
 
     resetWorkflow(true); // Keep inputs for this run
     setIsProcessing(true);
     setErrorMessage(null);
-    
+
     // Add workflow metadata log entry
     const providerInfo = getProviderDisplayInfo(agentSettings.llmProvider);
     addLog(`Workflow started for profile: "${profile.name}" | Provider: ${providerInfo.providerName} | Model: ${providerInfo.modelName}`, "INFO");
@@ -362,7 +362,7 @@ const App: React.FC = () => {
             {!selectedProfileId && !isProcessing && documentTypeProfiles.length === 0 && (
              <div className="bg-amber-800/50 border border-amber-700 p-4 rounded-lg text-amber-200">
                 <h4 className="font-semibold text-amber-100">Configuration needed:</h4>
-                <p className="text-sm">No document type profiles found. Please go to <button onClick={() => setCurrentView('settings')} className="underline hover:text-amber-100">Settings</button> to add at least one profile before starting the workflow.</p>
+                <p className="text-sm">No document type profiles found. Add at least one profile in <button onClick={() => setCurrentView('settings')} className="underline hover:text-amber-100">Settings</button> before starting the workflow.</p>
              </div>
            )}
         </div>

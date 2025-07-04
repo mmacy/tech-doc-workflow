@@ -11,7 +11,7 @@ interface DocumentTypeProfilesTabProps {
 const DocumentTypeProfilesTab: React.FC<DocumentTypeProfilesTabProps> = ({ profiles, onProfilesChange, disabled }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProfile, setEditingProfile] = useState<DocumentTypeProfile | null>(null);
-  
+
   const handleAddNewProfile = () => {
     setEditingProfile(null);
     setIsModalOpen(true);
@@ -37,11 +37,11 @@ const DocumentTypeProfilesTab: React.FC<DocumentTypeProfilesTabProps> = ({ profi
     setIsModalOpen(false);
     setEditingProfile(null);
   };
-  
+
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-xl font-semibold text-slate-100 mb-1">Document Type Profiles</h3>
+        <h3 className="text-xl font-semibold text-slate-100 mb-1">Doc type profiles</h3>
         <p className="text-sm text-slate-400">
           Manage templates and definitions for different types of documents your team authors.
           These profiles will be available in the main form when starting a new workflow.
