@@ -72,3 +72,12 @@ export interface ReviewFeedbackEntry {
 }
 
 export type View = 'main' | 'settings';
+
+// Theme types
+export type Theme = 'light' | 'dark';
+
+export interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
+}

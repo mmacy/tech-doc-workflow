@@ -38,9 +38,9 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-slate-800 p-6 rounded-lg shadow-lg">
+    <form onSubmit={handleSubmit} className="space-y-6 card-theme p-6">
       <div>
-        <label htmlFor="documentTypeProfile" className="block text-sm font-medium text-slate-300 mb-1">
+        <label htmlFor="documentTypeProfile" className="block text-sm font-medium text-theme-secondary mb-1">
           Document type profile
         </label>
         <select
@@ -49,7 +49,7 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
           value={selectedProfileId || ''}
           onChange={(e) => onProfileChange(e.target.value)}
           disabled={isProcessing || profiles.length === 0}
-          className="w-full p-3 bg-slate-700 border border-slate-600 rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500 disabled:opacity-50"
+          className="w-full p-3 input-theme rounded-md disabled:opacity-50"
         >
           <option value="" disabled>
             {profiles.length === 0 ? "No profiles available (Go to Settings)" : "Select a profile..."}
@@ -60,15 +60,15 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
             </option>
           ))}
         </select>
-         {profiles.length === 0 && <p className="text-xs text-amber-400 mt-1">Add document type profiles in Settings.</p>}
+         {profiles.length === 0 && <p className="text-xs text-theme-warning mt-1">Add document type profiles in Settings.</p>}
          {selectedProfileId && profiles.find(p => p.id === selectedProfileId) && (
-            <p className="text-xs text-slate-400 mt-1">{profiles.find(p => p.id === selectedProfileId)?.description}</p>
+            <p className="text-xs text-theme-secondary mt-1">{profiles.find(p => p.id === selectedProfileId)?.description}</p>
          )}
       </div>
 
       <div>
-        <label htmlFor="sourceContent" className="block text-sm font-medium text-slate-300 mb-1">
-          Draft content <span className="text-red-400">*</span>
+        <label htmlFor="sourceContent" className="block text-sm font-medium text-theme-secondary mb-1">
+          Draft content <span className="text-theme-error">*</span>
         </label>
         <textarea
           id="sourceContent"
@@ -79,13 +79,13 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
           onChange={(e) => onSourceContentChange(e.target.value)}
           disabled={isProcessing}
           required
-          className="w-full p-3 bg-slate-700 border border-slate-600 rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500 disabled:opacity-50 placeholder-slate-500"
+          className="w-full p-3 input-theme rounded-md disabled:opacity-50"
         />
-        <p className="text-xs text-slate-400 mt-1">This is the primary material the document will be based on.</p>
+        <p className="text-xs text-theme-muted mt-1">This is the primary material the document will be based on.</p>
       </div>
 
       <div>
-        <label htmlFor="supportingContent" className="block text-sm font-medium text-slate-300 mb-1">
+        <label htmlFor="supportingContent" className="block text-sm font-medium text-theme-secondary mb-1">
           Supporting content (optional)
         </label>
         <textarea
@@ -96,15 +96,15 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
           value={supportingContent}
           onChange={(e) => onSupportingContentChange(e.target.value)}
           disabled={isProcessing}
-          className="w-full p-3 bg-slate-700 border border-slate-600 rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500 disabled:opacity-50 placeholder-slate-500"
+          className="w-full p-3 input-theme rounded-md disabled:opacity-50"
         />
-        <p className="text-xs text-slate-400 mt-1">Additional context to help the workflow roles.</p>
+        <p className="text-xs text-theme-muted mt-1">Additional context to help the workflow roles.</p>
       </div>
 
       <button
         type="submit"
         disabled={isProcessing || !sourceContent.trim() || !selectedProfileId || profiles.length === 0}
-        className="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 disabled:bg-slate-500 disabled:cursor-not-allowed transition-colors"
+        className="w-full flex items-center justify-center px-6 py-3 btn-theme-primary text-white text-base font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-theme-primary focus:ring-theme-accent disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isProcessing ? (
           <>

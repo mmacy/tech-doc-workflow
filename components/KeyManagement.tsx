@@ -47,16 +47,16 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
     <div className="space-y-6">
       {/* Security Warning Banner */}
       {showWarning && (
-        <div className="bg-amber-50 border border-amber-200 rounded-md p-4">
+        <div className="bg-theme-warning/10 border border-theme-warning/30 rounded-md p-4">
           <div className="flex items-start">
-            <svg className="w-5 h-5 text-amber-600 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-5 h-5 text-theme-warning mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
             </svg>
             <div className="flex-1">
-              <h4 className="font-medium text-amber-900 mb-1">
+              <h4 className="font-medium text-theme-warning mb-1">
                 Bring Your Own Keys (BYOK) - WARNING!
               </h4>
-              <ul className="text-sm text-amber-800 space-y-1">
+              <ul className="text-sm text-theme-warning space-y-1">
                 <li>• Use development/test keys only</li>
                 <li>• Keys are stored in memory and cleared when you close this browser tab</li>
                 <li>• Never share screenshots showing your API keys</li>
@@ -64,7 +64,7 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
               </ul>
               <button
                 onClick={() => setShowWarning(false)}
-                className="text-xs text-amber-700 hover:text-amber-800 mt-2 underline"
+                className="text-xs text-theme-warning hover:text-theme-warning/80 mt-2 underline"
               >
                 Dismiss warning
               </button>
@@ -75,7 +75,7 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
 
       {/* Active Keys Display */}
       {currentKeys.length > 0 && (
-        <div className="bg-gray-50 rounded-md p-4">
+        <div className="bg-theme-elevated rounded-md p-4">
           <h4 className="font-medium mb-3 flex items-center">
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
@@ -86,23 +86,23 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
             {currentKeys.map((keyInfo) => (
               <div
                 key={keyInfo.provider}
-                className="flex items-center justify-between bg-white rounded px-3 py-2 border"
+                className="flex items-center justify-between bg-theme-secondary rounded px-3 py-2 border border-theme"
               >
                 <div className="flex items-center space-x-3">
-                  <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 text-theme-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                   <span className="font-medium capitalize">{keyInfo.provider}</span>
-                  <code className="text-sm bg-gray-100 px-2 py-0.5 rounded">
+                  <code className="text-sm bg-theme-surface px-2 py-0.5 rounded">
                     {keyInfo.maskedKey}
                   </code>
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-theme-muted">
                     Added {keyInfo.addedAt.toLocaleTimeString()}
                   </span>
                 </div>
                 <button
                   onClick={() => handleRemoveKey(keyInfo.provider)}
-                  className="text-red-500 hover:text-red-600 p-1"
+                  className="text-theme-error hover:text-theme-error/80 p-1"
                   title="Remove key"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,14 +142,14 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
                       }
                     }}
                     placeholder={provider.placeholder}
-                    className={`block w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900 placeholder-gray-500 ${
-                      errors[provider.id] ? 'border-red-500' : 'border-gray-300'
+                    className={`block w-full px-3 py-2 pr-10 input-theme rounded-md shadow-sm ${
+                      errors[provider.id] ? 'border-theme-error' : ''
                     }`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowKeys({ ...showKeys, [provider.id]: !showKeys[provider.id] })}
-                    className="absolute right-2 top-2.5 text-gray-500 hover:text-gray-700"
+                    className="absolute right-2 top-2.5 text-theme-muted hover:text-theme-secondary"
                   >
                     {showKeys[provider.id] ? (
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -166,13 +166,13 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
                 <button
                   onClick={() => handleAddKey(provider.id)}
                   disabled={!keyInputs[provider.id]}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  className="px-4 py-2 btn-theme-primary text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   Add Key
                 </button>
               </div>
               {errors[provider.id] && (
-                <p className="text-sm text-red-500 flex items-center">
+                <p className="text-sm text-theme-error flex items-center">
                   <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                   </svg>
@@ -194,7 +194,7 @@ export function KeyManagement({ onKeysUpdated }: KeyManagementProps) {
                 onKeysUpdated?.();
               }
             }}
-            className="text-sm text-red-500 hover:text-red-600 flex items-center"
+            className="text-sm text-theme-error hover:text-theme-error/80 flex items-center"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

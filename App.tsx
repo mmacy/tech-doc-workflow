@@ -9,8 +9,10 @@ import AgentCard from './components/AgentCard';
 import Spinner from './components/Spinner';
 import DownloadReviewLogButton from './components/DownloadReviewLogButton';
 import SettingsPage from './pages/SettingsPage'; // New Settings Page
+import { useTheme } from './contexts/ThemeContext';
 
 const App: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
   const [currentView, setCurrentView] = useState<View>('main');
 
   const [selectedProfileId, setSelectedProfileId] = useState<string | null>(null);
@@ -257,15 +259,32 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 md:p-8 flex flex-col items-center">
+    <div className="min-h-screen bg-theme-primary text-theme-primary p-4 md:p-8 flex flex-col items-center">
       <header className="w-full max-w-6xl mb-6 text-center">
         <div className="flex justify-between items-center mb-2">
-            <span className="w-1/4"></span> {/* Spacer */}
-            <h1 className="text-4xl font-bold text-sky-400 w-1/2">Tech Doc Workflow</h1>
+            <div className="w-1/4 flex justify-start">
+                <button
+                    onClick={toggleTheme}
+                    className="px-3 py-2 text-sm btn-theme-secondary rounded-md text-theme-accent"
+                    title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                >
+                    {theme === 'dark' ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 inline mr-1.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+                        </svg>
+                    ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 inline mr-1.5">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                        </svg>
+                    )}
+                    {theme === 'dark' ? 'Light' : 'Dark'}
+                </button>
+            </div>
+            <h1 className="text-4xl font-bold text-theme-accent w-1/2">Tech Doc Workflow</h1>
             <div className="w-1/4 flex justify-end">
                 <button
                     onClick={() => setCurrentView('settings')}
-                    className="px-4 py-2 text-sm bg-slate-700 hover:bg-slate-600 rounded-md text-sky-300 transition-colors"
+                    className="px-4 py-2 text-sm btn-theme-secondary rounded-md text-theme-accent"
                     title="Go to settings"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 inline mr-1.5">
@@ -275,7 +294,7 @@ const App: React.FC = () => {
                 </button>
             </div>
         </div>
-        <p className="text-slate-400 mt-1">Multi-role workflow for transforming rough content into publish-ready technical documents.</p>
+        <p className="text-theme-secondary mt-1">Multi-role workflow for transforming rough content into publish-ready technical documents.</p>
       </header>
 
       <main className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -298,7 +317,7 @@ const App: React.FC = () => {
            <button
             onClick={() => resetWorkflow(false)}
             disabled={isProcessing}
-            className="w-full flex items-center justify-center px-6 py-3 border border-slate-600 text-base font-medium rounded-md text-slate-300 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-sky-500 disabled:opacity-50 transition-colors"
+            className="w-full flex items-center justify-center px-6 py-3 btn-theme-secondary text-base font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-theme-primary focus:ring-theme-accent disabled:opacity-50"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
@@ -310,11 +329,11 @@ const App: React.FC = () => {
         <div className="md:col-span-2 space-y-6">
           <div className="flex flex-col h-[75rem] gap-6">
             <div className="flex-shrink-0">
-                <div className="bg-slate-800 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-xl font-semibold text-slate-100 mb-4 border-b border-slate-700 pb-2">Role status</h3>
+                <div className="card-theme p-6">
+                  <h3 className="text-xl font-semibold text-theme-primary mb-4 border-b border-theme pb-2">Role status</h3>
                   {isProcessing && !agentStates.some(a => [AgentStatus.WORKING, AgentStatus.REVIEWING].includes(a.status)) &&
                   !workflowLogs.some(log => log.message.includes("Workflow started")) && (
-                      <div className="flex items-center justify-center p-4 text-slate-400">
+                      <div className="flex items-center justify-center p-4 text-theme-secondary">
                           <Spinner size="md" /> <span className="ml-3">Initializing workflow...</span>
                       </div>
                   )}
@@ -333,17 +352,17 @@ const App: React.FC = () => {
           </div>
 
           {errorMessage && (
-            <div className="bg-red-800/50 border border-red-700 p-4 rounded-lg text-red-200">
-              <h4 className="font-semibold text-red-100">Error:</h4>
+            <div className="bg-theme-error/10 border border-theme-error/30 p-4 rounded-lg text-theme-error">
+              <h4 className="font-semibold">Error:</h4>
               <p className="text-sm">{errorMessage}</p>
             </div>
           )}
 
           {finalDocument && !isProcessing && (
-            <div className="bg-slate-800 p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-slate-100 mb-2">Final document ready</h3>
-               <p className="text-sm text-slate-400 mb-4">The workflow has completed. You can download the final Markdown document below.</p>
-              <div className="max-h-96 overflow-y-auto bg-slate-700 p-4 rounded-md border border-slate-600 mb-4 prose prose-sm prose-invert max-w-none">
+            <div className="card-theme p-6">
+              <h3 className="text-xl font-semibold text-theme-primary mb-2">Final document ready</h3>
+               <p className="text-sm text-theme-secondary mb-4">The workflow has completed. You can download the final Markdown document below.</p>
+              <div className="max-h-96 overflow-y-auto bg-theme-elevated p-4 rounded-md border border-theme mb-4 prose prose-sm max-w-none scrollbar-theme">
                 <pre className="whitespace-pre-wrap">{finalDocument}</pre>
               </div>
               <DownloadButton
@@ -353,21 +372,21 @@ const App: React.FC = () => {
             </div>
           )}
            {!selectedProfileId && !isProcessing && documentTypeProfiles.length > 0 && (
-             <div className="bg-sky-800/50 border border-sky-700 p-4 rounded-lg text-sky-200">
-                <h4 className="font-semibold text-sky-100">Getting started:</h4>
+             <div className="bg-theme-accent/10 border border-theme-accent/30 p-4 rounded-lg text-theme-accent">
+                <h4 className="font-semibold">Getting started:</h4>
                 <p className="text-sm">Select a document type profile, paste your source content, and click "Start authoring workflow".</p>
-                <p className="text-sm mt-1">You can manage document type profiles in <button onClick={() => setCurrentView('settings')} className="underline hover:text-sky-100">Settings</button>.</p>
+                <p className="text-sm mt-1">You can manage document type profiles in <button onClick={() => setCurrentView('settings')} className="underline hover:text-theme-primary">Settings</button>.</p>
              </div>
            )}
             {!selectedProfileId && !isProcessing && documentTypeProfiles.length === 0 && (
-             <div className="bg-amber-800/50 border border-amber-700 p-4 rounded-lg text-amber-200">
-                <h4 className="font-semibold text-amber-100">Configuration needed:</h4>
-                <p className="text-sm">No document type profiles found. Add at least one profile in <button onClick={() => setCurrentView('settings')} className="underline hover:text-amber-100">Settings</button> before starting the workflow.</p>
+             <div className="bg-theme-warning/10 border border-theme-warning/30 p-4 rounded-lg text-theme-warning">
+                <h4 className="font-semibold">Configuration needed:</h4>
+                <p className="text-sm">No document type profiles found. Add at least one profile in <button onClick={() => setCurrentView('settings')} className="underline hover:text-theme-accent">Settings</button> before starting the workflow.</p>
              </div>
            )}
         </div>
       </main>
-       <footer className="w-full max-w-6xl mt-12 text-center text-xs text-slate-500">
+       <footer className="w-full max-w-6xl mt-12 text-center text-xs text-theme-muted">
         <p>Copyright 2025 | Marsh Macy</p>
       </footer>
     </div>
