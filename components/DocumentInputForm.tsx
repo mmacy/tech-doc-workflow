@@ -31,7 +31,7 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
       return;
     }
     if (!selectedProfileId) {
-      alert("Please select a document type profile.");
+      alert("Slect a document type profile.");
       return;
     }
     onSubmit();
@@ -60,7 +60,7 @@ const DocumentInputForm: React.FC<DocumentInputFormProps> = ({
             </option>
           ))}
         </select>
-         {profiles.length === 0 && <p className="text-xs text-amber-400 mt-1">Please add document type profiles in Settings.</p>}
+         {profiles.length === 0 && <p className="text-xs text-amber-400 mt-1">Add document type profiles in Settings.</p>}
          {selectedProfileId && profiles.find(p => p.id === selectedProfileId) && (
             <p className="text-xs text-slate-400 mt-1">{profiles.find(p => p.id === selectedProfileId)?.description}</p>
          )}

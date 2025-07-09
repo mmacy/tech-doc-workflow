@@ -48,7 +48,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
       template: template, // Keep template as is, allow empty
     });
   };
-  
+
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>, setter: (value: string) => void) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -59,7 +59,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
         };
         reader.readAsText(file);
       } else {
-        alert('Please select a .txt or .md file.');
+        alert('Select a .txt or .md file.');
       }
     }
     // Reset file input to allow selecting the same file again
@@ -72,7 +72,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
     <div className="fixed inset-0 bg-slate-900 bg-opacity-75 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ease-in-out">
       <div className="bg-slate-800 p-6 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
         <h2 className="text-xl font-semibold text-sky-300 mb-4">
-          {profile ? 'Edit Document Type Profile' : 'Add New Document Type Profile'}
+          {profile ? 'Edit doc typ profile' : 'Add doc type profile'}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800 flex-grow">
           <div>
@@ -115,7 +115,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
                 >
                     Load from file
                 </button>
-                <input 
+                <input
                     type="file"
                     ref={docTypeDescFileInputRef}
                     onChange={(e) => handleFileSelect(e, setDocTypeDescription)}
@@ -146,7 +146,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
                 >
                     Load from file
                 </button>
-                <input 
+                <input
                     type="file"
                     ref={templateFileInputRef}
                     onChange={(e) => handleFileSelect(e, setTemplate)}
@@ -176,7 +176,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
               type="submit"
               className="px-4 py-2 text-sm bg-sky-600 hover:bg-sky-700 text-white rounded-md"
             >
-              {profile ? 'Save Changes' : 'Add Profile'}
+              {profile ? 'Save changes' : 'Add profile'}
             </button>
           </div>
         </form>

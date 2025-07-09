@@ -48,6 +48,7 @@ export interface AgentSettings {
   reviewerGuidance: Record<AgentName.INFORMATION_ARCHITECT | AgentName.TECHNICAL_EDITOR | AgentName.TECHNICAL_REVIEWER, string>;
   writingStyleGuide: string;
   markdownStyleGuide: string;
+  llmProvider: import('./types/providers').ProviderConfig;
 }
 
 export interface DocumentTypeProfile {
