@@ -15,5 +15,5 @@ Demonstration of using the [evaluator-optimizer workflow](https://www.anthropic.
 ## Run the app locally
 
 1. Install dependencies: `npm install`
-2. Set `GEMINI_API_KEY=YOUR_KEY_HERE` enivronment variable (replace `YOUR_KEY_HERE` with your Gemini API key)
-3. Run the app: `npm run dev`
+2. Run the app: `npm run dev`
+3. Configure your API keys through the application's settings interface

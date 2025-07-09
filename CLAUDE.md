@@ -11,11 +11,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Environment setup
 
-Set the `GEMINI_API_KEY` environment variable with your Gemini API key before running the app.
+No environment variables are required. Configure your API keys through the application's settings interface.
 
 ## Architecture overview
 
-This is a React + TypeScript application built with Vite that implements an evaluator-optimizer workflow for technical documentation authoring using Google's Gemini API.
+This is a React + TypeScript application built with Vite that implements an evaluator-optimizer workflow for technical documentation authoring using various LLM providers (OpenAI, Gemini, Azure OpenAI).
 
 ### Core workflow system
 
@@ -38,7 +38,7 @@ The workflow follows this pattern:
 - **App.tsx**: Main application component managing workflow state and orchestration
 - **types.ts**: Core TypeScript definitions for roles, workflow state, and document profiles
 - **constants.ts**: Role configurations, initial settings, document type profiles, and prompt templates
-- **services/geminiService.ts**: Gemini API integration for text generation and review decisions
+- **services/llmService.ts**: LLM provider abstraction for text generation and review decisions
 - **components/**: UI components for document input, role status, workflow logs, and settings
 
 ### Document type profiles

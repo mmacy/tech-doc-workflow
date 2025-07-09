@@ -16,17 +16,11 @@ export const initializeProvider = (config: ProviderConfig): void => {
 };
 
 export const getDefaultProviderConfig = (): ProviderConfig => {
-  // Try to use Gemini as default if API key is available
-  const geminiApiKey = process.env.GEMINI_API_KEY;
-  if (geminiApiKey) {
-    return {
-      type: 'gemini',
-      apiKey: geminiApiKey
-    };
-  }
-
-  // Fallback to requiring manual configuration
-  throw new Error('No default provider configuration available - configure a provider.');
+  // Default to Gemini with empty key (requires manual configuration)
+  return {
+    type: 'gemini',
+    apiKey: ''
+  };
 };
 
 export const callLLMTextGeneration = async (prompt: string, systemInstruction?: string): Promise<string> => {

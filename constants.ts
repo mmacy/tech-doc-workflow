@@ -30,41 +30,6 @@ export const AGENT_CONFIGURATIONS: ReadonlyArray<AgentConfig> = [
 ];
 
 const getDefaultProviderConfig = (): ProviderConfig => {
-  // Check for environment variables in order of preference
-
-  // OpenAI
-  const openaiApiKey = process.env.OPENAI_API_KEY;
-  if (openaiApiKey) {
-    return {
-      type: 'openai',
-      apiKey: openaiApiKey,
-      model: 'gpt-4.1-nano'
-    };
-  }
-
-  // Azure OpenAI
-  const azureApiKey = process.env.AZURE_OPENAI_API_KEY;
-  const azureEndpoint = process.env.AZURE_OPENAI_ENDPOINT;
-  const azureDeployment = process.env.AZURE_OPENAI_DEPLOYMENT;
-  if (azureApiKey && azureEndpoint && azureDeployment) {
-    return {
-      type: 'azure-openai',
-      apiKey: azureApiKey,
-      azureEndpoint: azureEndpoint,
-      azureDeployment: azureDeployment,
-      azureApiVersion: process.env.AZURE_OPENAI_API_VERSION || '2024-10-01-preview'
-    };
-  }
-
-  // Gemini (fallback)
-  const geminiApiKey = process.env.GEMINI_API_KEY;
-  if (geminiApiKey) {
-    return {
-      type: 'gemini',
-      apiKey: geminiApiKey
-    };
-  }
-
   // Default to Gemini with empty key (requires manual configuration)
   return {
     type: 'gemini',
