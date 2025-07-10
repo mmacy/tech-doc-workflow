@@ -47,7 +47,7 @@ export class OpenAIProvider implements LLMProvider {
 
       return content.trim();
     } catch (error) {
-      console.error("OpenAI API Error:", error);
+      console.error("OpenAI API Error:", error instanceof Error ? error.message : 'Unknown error');
       if (error instanceof Error) {
         const openaiError = error as any;
         if (openaiError.status === 401) {

@@ -55,7 +55,7 @@ export class AzureOpenAIProvider implements LLMProvider {
 
       return content.trim();
     } catch (error) {
-      console.error("Azure OpenAI API Error:", error);
+      console.error("Azure OpenAI API Error:", error instanceof Error ? error.message : 'Unknown error');
       if (error instanceof Error) {
         const azureError = error as any;
         if (azureError.status === 401) {

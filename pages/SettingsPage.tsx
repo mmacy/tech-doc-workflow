@@ -53,9 +53,19 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
 
   const handleSaveToFile = () => {
+    // Remove API keys from agentSettings before saving for security
+    const { llmProvider, ...agentSettingsWithoutKeys } = agentSettings;
+    const providerWithoutApiKey = {
+      ...llmProvider,
+      apiKey: '', // Never save API keys to file
+    };
+    
     const settingsToSave = {
         documentTypeProfiles: documentTypeProfiles,
-        agentSettings: agentSettings,
+        agentSettings: {
+          ...agentSettingsWithoutKeys,
+          llmProvider: providerWithoutApiKey,
+        },
     };
     const jsonString = JSON.stringify(settingsToSave, null, 2);
     const blob = new Blob([jsonString], { type: "application/json" });
