@@ -155,46 +155,59 @@
   
   /* Interactive elements */
   .btn-theme-primary {
-    background-color: #cc7b00;
-    color: white;
-    transition: background-color 0.2s ease;
+    background-color: #cc7b00 !important;
+    color: #1a1a1a !important;
+    border: 1px solid #2d1810 !important;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3) !important;
   }
   
   .btn-theme-primary:hover {
-    background-color: #b8700a;
+    background-color: #b8700a !important;
+    color: #1a1a1a !important;
+    border-color: #1a0f08 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.4) !important;
   }
   
   .dark .btn-theme-primary {
-    background-color: #e5a00d;
+    background-color: #e5a00d !important;
+    color: #1a1a1a !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5) !important;
   }
   
   .dark .btn-theme-primary:hover {
-    background-color: #ffb31a;
+    background-color: #ffb31a !important;
+    color: #1a1a1a !important;
+    border-color: #f0f0f0 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.6) !important;
   }
   
   .btn-theme-secondary {
-    background-color: #ffffff;
-    color: #374151;
-    border: 2px solid #d1d5db;
+    background-color: #ffffff !important;
+    color: #374151 !important;
+    border: 1px solid #1f2937 !important;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
   }
   
   .btn-theme-secondary:hover {
-    background-color: #f9fafb;
-    border-color: #9ca3af;
+    background-color: #f9fafb !important;
+    border-color: #111827 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3) !important;
   }
   
   .dark .btn-theme-secondary {
-    background-color: #374151;
-    color: #ffffff;
-    border-color: #6b7280;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    background-color: #374151 !important;
+    color: #ffffff !important;
+    border-color: #e5e7eb !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5) !important;
   }
   
   .dark .btn-theme-secondary:hover {
-    background-color: #4b5563;
-    border-color: #9ca3af;
+    background-color: #4b5563 !important;
+    border-color: #f3f4f6 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.6) !important;
   }
   
   .card-theme {
@@ -212,11 +225,11 @@
   }
   
   .input-theme {
-    background-color: #ffffff;
-    border: 2px solid #d1d5db;
+    background-color: #f3f4f6;
+    border: 2px solid #9ca3af;
     color: #1a1a1a;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   }
   
   .input-theme::placeholder {
@@ -224,13 +237,16 @@
   }
   
   .input-theme:hover {
-    border-color: #9ca3af;
+    background-color: #ffffff;
+    border-color: #6b7280;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   }
   
   .input-theme:focus {
     outline: none;
+    background-color: #ffffff;
     border-color: #cc7b00;
-    box-shadow: 0 0 0 3px rgba(204, 123, 0, 0.1);
+    box-shadow: 0 0 0 3px rgba(204, 123, 0, 0.15), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
   }
   
   .dark .input-theme {
