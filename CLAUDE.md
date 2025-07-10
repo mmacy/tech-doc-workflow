@@ -52,7 +52,7 @@ The system uses configurable document type profiles that define:
 
 ### Agent settings and customization
 
-- Max revision loops per reviewer agent (configurable)
+- Max review passes per reviewer agent (configurable)
 - Custom guidance for each reviewer type
 - Global writing and Markdown style guides
 - All settings persist in component state and can be managed through the Settings UI

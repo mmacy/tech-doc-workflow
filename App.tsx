@@ -147,7 +147,7 @@ const App: React.FC = () => {
         // eslint-disable-next-line no-constant-condition
         while (true) {
           if (loopCount >= maxLoops) {
-            addLog(`Max revision loops (${maxLoops}) reached for ${reviewerConfig.id}. Proceeding to next role.`, "INFO", reviewerConfig.id);
+            addLog(`Max review passes (${maxLoops}) reached for ${reviewerConfig.id}. Proceeding to next role.`, "INFO", reviewerConfig.id);
             updateAgentStatus(reviewerConfig.id, AgentStatus.SKIPPED_MAX_LOOPS, undefined, loopCount);
             break;
           }

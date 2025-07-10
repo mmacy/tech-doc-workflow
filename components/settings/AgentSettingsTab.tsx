@@ -44,7 +44,7 @@ const AgentSettingsTab: React.FC<AgentSettingsTabProps> = ({ settings, onSetting
       </div>
        <div className="space-y-6">
         <div>
-            <p className="text-sm text-theme-secondary mb-1">Maximum revision loops</p>
+            <p className="text-sm text-theme-secondary mb-1">Maximum review passes</p>
             <p className="text-xs text-theme-muted mb-3">Configure the maximum times a document can be sent back to the Technical Writer by each specific reviewer.</p>
         </div>
         {reviewerAgents.map((agent) => (
@@ -53,7 +53,7 @@ const AgentSettingsTab: React.FC<AgentSettingsTabProps> = ({ settings, onSetting
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label htmlFor={`maxLoops-${agent.id}`} className="block text-theme-secondary text-sm mb-1">
-                        Max revision loops:
+                        Max review passes:
                     </label>
                     <input
                         type="number"
