@@ -173,24 +173,28 @@
   }
   
   .btn-theme-secondary {
-    background-color: #fafafa;
-    color: #1a1a1a;
-    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    color: #374151;
+    border: 2px solid #d1d5db;
     transition: all 0.2s ease;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
   
   .btn-theme-secondary:hover {
-    background-color: #f0f0f0;
+    background-color: #f9fafb;
+    border-color: #9ca3af;
   }
   
   .dark .btn-theme-secondary {
-    background-color: #252525;
+    background-color: #374151;
     color: #ffffff;
-    border-color: #404040;
+    border-color: #6b7280;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   }
   
   .dark .btn-theme-secondary:hover {
-    background-color: #333333;
+    background-color: #4b5563;
+    border-color: #9ca3af;
   }
   
   .card-theme {
@@ -209,33 +213,44 @@
   
   .input-theme {
     background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+    border: 2px solid #d1d5db;
     color: #1a1a1a;
     transition: all 0.2s ease;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
   
   .input-theme::placeholder {
-    color: #999999;
+    color: #9ca3af;
+  }
+  
+  .input-theme:hover {
+    border-color: #9ca3af;
   }
   
   .input-theme:focus {
     outline: none;
-    ring: 2px solid #cc7b00;
-    border-color: transparent;
+    border-color: #cc7b00;
+    box-shadow: 0 0 0 3px rgba(204, 123, 0, 0.1);
   }
   
   .dark .input-theme {
-    background-color: #2d2d2d;
-    border-color: #404040;
+    background-color: #374151;
+    border-color: #6b7280;
     color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
   }
   
   .dark .input-theme::placeholder {
-    color: #808080;
+    color: #9ca3af;
+  }
+  
+  .dark .input-theme:hover {
+    border-color: #9ca3af;
   }
   
   .dark .input-theme:focus {
-    ring-color: #e5a00d;
+    border-color: #e5a00d;
+    box-shadow: 0 0 0 3px rgba(229, 160, 13, 0.1);
   }
 }
 
