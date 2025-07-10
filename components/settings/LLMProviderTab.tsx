@@ -64,14 +64,14 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium mb-4">LLM provider configuration</h3>
-        <p className="text-gray-600 mb-6">
+        <h3 className="text-lg font-medium mb-4 text-theme-primary">LLM provider configuration</h3>
+        <p className="text-theme-secondary mb-6">
           Choose and configure the AI provider for text generation and document review.
         </p>
       </div>
 
       {/* Key Management Section */}
-      <div className="border-b pb-6">
+      <div className="border-b border-theme pb-6">
         <KeyManagement onKeysUpdated={() => {
           // Optionally refresh test results when keys are updated
           setTestResult(null);
@@ -80,14 +80,14 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-medium mb-2">Provider</label>
+          <label className="block text-sm font-medium mb-2 text-theme-secondary">Provider</label>
           <select
             value={provider.type}
             onChange={(e) => handleProviderTypeChange(e.target.value as ProviderType)}
-            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+            className="block w-full px-3 py-2 input-theme rounded-md"
           >
             {Object.values(PROVIDER_CONFIGS).map((config) => (
-              <option key={config.type} value={config.type} className="text-gray-900 bg-white">
+              <option key={config.type} value={config.type}>
                 {config.name}
               </option>
             ))}
@@ -96,19 +96,19 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
 
         {currentProviderInfo.configFields.map((field: ProviderConfigField) => (
           <div key={field.key}>
-            <label className="block text-sm font-medium mb-2">
+            <label className="block text-sm font-medium mb-2 text-theme-secondary">
               {field.label}
-              {field.required && <span className="text-red-500 ml-1">*</span>}
+              {field.required && <span className="text-theme-error ml-1">*</span>}
             </label>
             <input
               type={field.type === 'password' ? 'password' : 'text'}
               value={(provider[field.key] as string) || ''}
               onChange={(e) => handleFieldChange(field.key, e.target.value)}
               placeholder={field.placeholder}
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900 placeholder-gray-500"
+              className="block w-full px-3 py-2 input-theme rounded-md"
             />
             {field.description && (
-              <p className="mt-1 text-sm text-gray-500">{field.description}</p>
+              <p className="mt-1 text-sm text-theme-muted">{field.description}</p>
             )}
           </div>
         ))}
@@ -117,14 +117,14 @@ export const LLMProviderTab: React.FC<LLMProviderTabProps> = ({
           <button
             onClick={handleTestConnection}
             disabled={testingConnection}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 btn-theme-primary text-white rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {testingConnection ? 'Testing...' : 'Test Connection'}
           </button>
 
           {testResult && (
-            <div className="mt-3 p-3 rounded-md bg-gray-50 border">
-              <p className="text-sm text-gray-900">{testResult}</p>
+            <div className="mt-3 p-3 rounded-md bg-theme-elevated border border-theme">
+              <p className="text-sm text-theme-primary">{testResult}</p>
             </div>
           )}
         </div>

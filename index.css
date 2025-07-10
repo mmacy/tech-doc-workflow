@@ -1,0 +1,303 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme-aware utility classes with direct color values */
+@layer utilities {
+  /* Background colors */
+  .bg-theme-primary {
+    background-color: #f8f9fa;
+  }
+  
+  .dark .bg-theme-primary {
+    background-color: #1a1a1a;
+  }
+  
+  .bg-theme-secondary {
+    background-color: #ffffff;
+  }
+  
+  .dark .bg-theme-secondary {
+    background-color: #2d2d2d;
+  }
+  
+  .bg-theme-elevated {
+    background-color: #f0f0f0;
+  }
+  
+  .dark .bg-theme-elevated {
+    background-color: #3d3d3d;
+  }
+  
+  .bg-theme-surface {
+    background-color: #fafafa;
+  }
+  
+  .dark .bg-theme-surface {
+    background-color: #252525;
+  }
+  
+  .bg-theme-surface-hover {
+    background-color: #f0f0f0;
+  }
+  
+  .dark .bg-theme-surface-hover {
+    background-color: #333333;
+  }
+  
+  /* Text colors */
+  .text-theme-primary {
+    color: #1a1a1a;
+  }
+  
+  .dark .text-theme-primary {
+    color: #ffffff;
+  }
+  
+  .text-theme-secondary {
+    color: #666666;
+  }
+  
+  .dark .text-theme-secondary {
+    color: #b3b3b3;
+  }
+  
+  .text-theme-muted {
+    color: #999999;
+  }
+  
+  .dark .text-theme-muted {
+    color: #808080;
+  }
+  
+  /* Accent colors */
+  .text-theme-accent {
+    color: #cc7b00;
+  }
+  
+  .dark .text-theme-accent {
+    color: #e5a00d;
+  }
+  
+  .bg-theme-accent {
+    background-color: #cc7b00;
+  }
+  
+  .dark .bg-theme-accent {
+    background-color: #e5a00d;
+  }
+  
+  .bg-theme-accent-hover {
+    background-color: #b8700a;
+  }
+  
+  .dark .bg-theme-accent-hover {
+    background-color: #ffb31a;
+  }
+  
+  /* Border colors */
+  .border-theme {
+    border-color: #e0e0e0;
+  }
+  
+  .dark .border-theme {
+    border-color: #404040;
+  }
+  
+  /* Status colors */
+  .text-theme-success {
+    color: #198754;
+  }
+  
+  .dark .text-theme-success {
+    color: #28a745;
+  }
+  
+  .text-theme-warning {
+    color: #ff8800;
+  }
+  
+  .dark .text-theme-warning {
+    color: #ffc107;
+  }
+  
+  .text-theme-error {
+    color: #c82333;
+  }
+  
+  .dark .text-theme-error {
+    color: #dc3545;
+  }
+  
+  .bg-theme-success {
+    background-color: #198754;
+  }
+  
+  .dark .bg-theme-success {
+    background-color: #28a745;
+  }
+  
+  .bg-theme-warning {
+    background-color: #ff8800;
+  }
+  
+  .dark .bg-theme-warning {
+    background-color: #ffc107;
+  }
+  
+  .bg-theme-error {
+    background-color: #c82333;
+  }
+  
+  .dark .bg-theme-error {
+    background-color: #dc3545;
+  }
+  
+  /* Interactive elements */
+  .btn-theme-primary {
+    background-color: #cc7b00 !important;
+    color: #1a1a1a !important;
+    border: 1px solid #2d1810 !important;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .btn-theme-primary:hover {
+    background-color: #b8700a !important;
+    color: #1a1a1a !important;
+    border-color: #1a0f08 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  .dark .btn-theme-primary {
+    background-color: #e5a00d !important;
+    color: #1a1a1a !important;
+    border-color: #ffffff !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  .dark .btn-theme-primary:hover {
+    background-color: #ffb31a !important;
+    color: #1a1a1a !important;
+    border-color: #f0f0f0 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.6) !important;
+  }
+  
+  .btn-theme-secondary {
+    background-color: #ffffff !important;
+    color: #374151 !important;
+    border: 1px solid #1f2937 !important;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  .btn-theme-secondary:hover {
+    background-color: #f9fafb !important;
+    border-color: #111827 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.3) !important;
+  }
+  
+  .dark .btn-theme-secondary {
+    background-color: #374151 !important;
+    color: #ffffff !important;
+    border-color: #e5e7eb !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  .dark .btn-theme-secondary:hover {
+    background-color: #4b5563 !important;
+    border-color: #f3f4f6 !important;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.6) !important;
+  }
+  
+  .card-theme {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+  }
+  
+  .dark .card-theme {
+    background-color: #2d2d2d;
+    border-color: #404040;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .input-theme {
+    background-color: #f3f4f6;
+    border: 2px solid #9ca3af;
+    color: #1a1a1a;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .input-theme::placeholder {
+    color: #9ca3af;
+  }
+  
+  .input-theme:hover {
+    background-color: #ffffff;
+    border-color: #6b7280;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  }
+  
+  .input-theme:focus {
+    outline: none;
+    background-color: #ffffff;
+    border-color: #cc7b00;
+    box-shadow: 0 0 0 3px rgba(204, 123, 0, 0.15), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .input-theme {
+    background-color: #374151;
+    border-color: #6b7280;
+    color: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark .input-theme::placeholder {
+    color: #9ca3af;
+  }
+  
+  .dark .input-theme:hover {
+    border-color: #9ca3af;
+  }
+  
+  .dark .input-theme:focus {
+    border-color: #e5a00d;
+    box-shadow: 0 0 0 3px rgba(229, 160, 13, 0.1);
+  }
+}
+
+/* Root element transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar for themed components */
+.scrollbar-theme {
+  scrollbar-width: thin;
+  scrollbar-color: #e0e0e0 transparent;
+}
+
+.dark .scrollbar-theme {
+  scrollbar-color: #404040 transparent;
+}
+
+.scrollbar-theme::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-theme::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-theme::-webkit-scrollbar-thumb {
+  background-color: #e0e0e0;
+  border-radius: 3px;
+}
+
+.dark .scrollbar-theme::-webkit-scrollbar-thumb {
+  background-color: #404040;
+}

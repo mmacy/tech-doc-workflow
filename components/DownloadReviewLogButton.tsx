@@ -40,9 +40,7 @@ const DownloadReviewLogButton: React.FC<DownloadReviewLogButtonProps> = ({
     <button
       onClick={handleDownload}
       disabled={disabled || feedbackLog.length === 0}
-      className={`w-full px-6 py-3 rounded-lg font-semibold text-white transition-all
-                  bg-purple-600 hover:bg-purple-700 focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50
-                  disabled:bg-slate-600 disabled:text-slate-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2`}
+      className="w-full px-6 py-3 rounded-lg font-semibold btn-theme-secondary text-theme-primary focus:ring-2 focus:ring-theme-accent focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
       aria-label="Download review feedback log"
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">

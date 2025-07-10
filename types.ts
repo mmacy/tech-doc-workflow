@@ -16,7 +16,7 @@ export enum AgentStatus {
   REVIEWING = "Reviewing...",
   WAITING = "Waiting...",
   APPROVED = "Approved",
-  SKIPPED_MAX_LOOPS = "Skipped (Max Loops Reached)",
+  SKIPPED_MAX_LOOPS = "Skipped - max reviews reached",
   FAILED = "Failed",
   COMPLETED = "Completed",
 }
@@ -30,8 +30,8 @@ export interface AgentConfig {
 
 export interface AgentRuntimeState extends AgentConfig {
   status: AgentStatus;
-  feedbackGiven?: string; 
-  loops?: number; 
+  feedbackGiven?: string;
+  loops?: number;
   defaultMaxLoops?: number; // Updated to be generic number for easier state updates
 }
 
@@ -60,7 +60,7 @@ export interface DocumentTypeProfile {
 }
 
 // For Gemini API response parsing for review agents
-export type ReviewDecision = 
+export type ReviewDecision =
   | { type: "CONTINUE" }
   | { type: "REVISE"; feedback: string }
   | { type: "ERROR"; message: string };
@@ -72,3 +72,12 @@ export interface ReviewFeedbackEntry {
 }
 
 export type View = 'main' | 'settings';
+
+// Theme types
+export type Theme = 'light' | 'dark';
+
+export interface ThemeContextType {
+  theme: Theme;
+  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
+}

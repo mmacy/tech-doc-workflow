@@ -69,28 +69,28 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900 bg-opacity-75 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ease-in-out">
-      <div className="bg-slate-800 p-6 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-        <h2 className="text-xl font-semibold text-sky-300 mb-4">
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 transition-opacity duration-300 ease-in-out">
+      <div className="card-theme p-6 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+        <h2 className="text-xl font-semibold text-theme-accent mb-4">
           {profile ? 'Edit doc typ profile' : 'Add doc type profile'}
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800 flex-grow">
+        <form onSubmit={handleSubmit} className="space-y-4 overflow-y-auto pr-2 scrollbar-theme flex-grow">
           <div>
-            <label htmlFor="profileName" className="block text-sm font-medium text-slate-300 mb-1">
-              Profile name <span className="text-red-400">*</span>
+            <label htmlFor="profileName" className="block text-sm font-medium text-theme-secondary mb-1">
+              Profile name <span className="text-theme-error">*</span>
             </label>
             <input
               type="text"
               id="profileName"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className={`w-full p-2 bg-slate-700 border ${nameError ? 'border-red-500' : 'border-slate-600'} rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500`}
+              className={`w-full p-2 input-theme rounded-md ${nameError ? 'border-theme-error' : ''}`}
               required
             />
-            {nameError && <p className="text-xs text-red-400 mt-1">{nameError}</p>}
+            {nameError && <p className="text-xs text-theme-error mt-1">{nameError}</p>}
           </div>
           <div>
-            <label htmlFor="profileDescription" className="block text-sm font-medium text-slate-300 mb-1">
+            <label htmlFor="profileDescription" className="block text-sm font-medium text-theme-secondary mb-1">
               Description
             </label>
             <textarea
@@ -98,19 +98,19 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full p-2 bg-slate-700 border border-slate-600 rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500 placeholder-slate-500"
+              className="w-full p-2 input-theme rounded-md"
               placeholder="A brief description of this document type and its purpose."
             />
           </div>
           <div>
             <div className="flex justify-between items-center mb-1">
-                <label htmlFor="docTypeDescription" className="block text-sm font-medium text-slate-300">
+                <label htmlFor="docTypeDescription" className="block text-sm font-medium text-theme-secondary">
                   Document type guidance (optional)
                 </label>
                 <button
                     type="button"
                     onClick={() => docTypeDescFileInputRef.current?.click()}
-                    className="px-2 py-1 text-xs bg-slate-700 hover:bg-slate-600 rounded-md text-sky-300 transition-colors"
+                    className="px-2 py-1 text-xs bg-theme-elevated hover:bg-theme-surface-hover rounded-md text-theme-accent transition-colors"
                     title="Load content from a file"
                 >
                     Load from file
@@ -128,20 +128,20 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
               value={docTypeDescription}
               onChange={(e) => setDocTypeDescription(e.target.value)}
               rows={10}
-              className="w-full p-2 bg-slate-700 border border-slate-600 rounded-md text-slate-100 font-mono text-sm focus:ring-sky-500 focus:border-sky-500 placeholder-slate-500"
+              className="w-full p-2 input-theme rounded-md font-mono text-sm"
               placeholder="A detailed guide on how to write this type of document. This will be provided as context to the AI roles (except the Technical Reviewer)."
             />
-             <p className="text-xs text-slate-400 mt-1">Explain the purpose, audience, and structure for this document type.</p>
+             <p className="text-xs text-theme-muted mt-1">Explain the purpose, audience, and structure for this document type.</p>
           </div>
           <div>
             <div className="flex justify-between items-center mb-1">
-                <label htmlFor="profileTemplate" className="block text-sm font-medium text-slate-300">
+                <label htmlFor="profileTemplate" className="block text-sm font-medium text-theme-secondary">
                   Markdown template (optional)
                 </label>
                 <button
                     type="button"
                     onClick={() => templateFileInputRef.current?.click()}
-                    className="px-2 py-1 text-xs bg-slate-700 hover:bg-slate-600 rounded-md text-sky-300 transition-colors"
+                    className="px-2 py-1 text-xs bg-theme-elevated hover:bg-theme-surface-hover rounded-md text-theme-accent transition-colors"
                     title="Load content from a file"
                 >
                     Load from file
@@ -159,22 +159,22 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({ profile, onSave
               value={template}
               onChange={(e) => setTemplate(e.target.value)}
               rows={10}
-              className="w-full p-2 bg-slate-700 border border-slate-600 rounded-md text-slate-100 font-mono text-sm focus:ring-sky-500 focus:border-sky-500 placeholder-slate-500"
+              className="w-full p-2 input-theme rounded-md font-mono text-sm"
               placeholder="Enter a Markdown template structure. You can use placeholders like {{TITLE}} or {{MAIN_CONTENT}} for the AI to fill."
             />
-             <p className="text-xs text-slate-400 mt-1">This template will guide the Technical Writer role. Leave blank for a generic structure.</p>
+             <p className="text-xs text-theme-muted mt-1">This template will guide the Technical Writer role. Leave blank for a generic structure.</p>
           </div>
-          <div className="flex justify-end space-x-3 pt-2 sticky bottom-0 bg-slate-800 pb-1 -mx-2 px-2">
+          <div className="flex justify-end space-x-3 pt-2 sticky bottom-0 bg-theme-secondary pb-1 -mx-2 px-2">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm bg-slate-600 hover:bg-slate-500 text-slate-100 rounded-md"
+              className="px-4 py-2 text-sm btn-theme-secondary rounded-md"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 text-sm bg-sky-600 hover:bg-sky-700 text-white rounded-md"
+              className="px-4 py-2 text-sm btn-theme-primary rounded-md"
             >
               {profile ? 'Save changes' : 'Add profile'}
             </button>

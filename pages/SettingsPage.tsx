@@ -143,7 +143,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 p-4 md:p-8 flex flex-col items-center">
+    <div className="min-h-screen bg-theme-primary text-theme-primary p-4 md:p-8 flex flex-col items-center">
       <ConfirmModal
         isOpen={isConfirmModalOpen}
         onClose={closeConfirmModal}
@@ -157,10 +157,10 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
 
       <header className="w-full max-w-4xl mb-8">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-sky-400">Settings</h1>
+          <h1 className="text-3xl font-bold text-theme-accent">Settings</h1>
           <button
             onClick={onBackToMain}
-            className="px-4 py-2 text-sm bg-sky-600 hover:bg-sky-700 rounded-md text-white transition-colors"
+            className="px-4 py-2 text-sm btn-theme-primary rounded-md text-white"
           >
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 inline mr-1.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
@@ -169,7 +169,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           </button>
         </div>
         {disabled && (
-            <p className="text-xs text-amber-400 mt-2 bg-amber-900/50 p-2 rounded-md">Some settings are disabled while the authoring workflow is processing in the main app.</p>
+            <p className="text-xs text-theme-warning mt-2 bg-theme-warning/10 p-2 rounded-md border border-theme-warning/30">Some settings are disabled while the authoring workflow is processing in the main app.</p>
         )}
       </header>
 
@@ -177,27 +177,27 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
         <button
           onClick={handleSaveToFile}
           disabled={disabled || documentTypeProfiles.length === 0}
-          className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-md font-medium text-sm disabled:bg-slate-500 flex items-center justify-center"
+          className="px-4 py-2 bg-theme-success hover:bg-theme-success/80 text-white rounded-md font-medium text-sm disabled:opacity-50 flex items-center justify-center"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /></svg>
-          Save All Settings to File
+          Save settings to file
         </button>
-        <label className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md font-medium text-sm disabled:bg-slate-500 cursor-pointer flex items-center justify-center">
+        <label className="px-4 py-2 btn-theme-primary rounded-md font-medium text-sm disabled:opacity-50 cursor-pointer flex items-center justify-center">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg>
-            Load Settings from File
+            Load settings from file
           <input type="file" ref={fileInputRef} onChange={handleLoadFromFile} disabled={disabled} className="hidden" accept=".json" />
         </label>
       </div>
 
-      <main className="w-full max-w-4xl bg-slate-800 shadow-xl rounded-lg p-6 md:p-8">
-        <div className="mb-6 border-b border-slate-700">
+      <main className="w-full max-w-4xl card-theme p-6 md:p-8">
+        <div className="mb-6 border-b border-theme">
           <nav className="-mb-px flex space-x-4" aria-label="Tabs">
             <button
               onClick={() => setActiveTab('llmProvider')}
               className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
                 ${activeTab === 'llmProvider'
-                  ? 'border-sky-500 text-sky-400'
-                  : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-secondary hover:text-theme-primary hover:border-theme'
                 }`}
             >
               LLM providers
@@ -206,8 +206,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
               onClick={() => setActiveTab('agents')}
               className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
                 ${activeTab === 'agents'
-                  ? 'border-sky-500 text-sky-400'
-                  : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-secondary hover:text-theme-primary hover:border-theme'
                 }`}
             >
               Role settings
@@ -216,8 +216,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
               onClick={() => setActiveTab('profiles')}
               className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
                 ${activeTab === 'profiles'
-                  ? 'border-sky-500 text-sky-400'
-                  : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-secondary hover:text-theme-primary hover:border-theme'
                 }`}
             >
               Doc type profiles
@@ -226,8 +226,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
               onClick={() => setActiveTab('globalStyle')}
               className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
                 ${activeTab === 'globalStyle'
-                  ? 'border-sky-500 text-sky-400'
-                  : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-500'
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-secondary hover:text-theme-primary hover:border-theme'
                 }`}
             >
               Global style guidance
@@ -267,7 +267,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
           )}
         </div>
       </main>
-       <footer className="w-full max-w-6xl mt-12 text-center text-xs text-slate-500">
+       <footer className="w-full max-w-6xl mt-12 text-center text-xs text-theme-muted">
         <p>Changes made here will be applied to subsequent workflow runs.</p>
       </footer>
     </div>

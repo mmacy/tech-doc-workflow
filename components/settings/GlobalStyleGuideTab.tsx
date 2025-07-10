@@ -42,22 +42,22 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
   return (
     <div className="space-y-8">
       <div>
-        <h3 className="text-xl font-semibold text-slate-100 mb-1">Global style guidance</h3>
-        <p className="text-sm text-slate-400">
+        <h3 className="text-xl font-semibold text-theme-primary mb-1">Global style guidance</h3>
+        <p className="text-sm text-theme-secondary">
           Define overarching style rules that apply to all document types. This guidance will be provided to all roles except the Technical Reviewer.
         </p>
       </div>
       <div className="space-y-6">
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label htmlFor="writingStyleGuide" className="block text-sm font-medium text-slate-300">
+            <label htmlFor="writingStyleGuide" className="block text-sm font-medium text-theme-secondary">
               Writing Style Guide
             </label>
             <button
                 type="button"
                 onClick={() => writingFileInputRef.current?.click()}
                 disabled={disabled}
-                className="px-2 py-1 text-xs bg-slate-700 hover:bg-slate-600 rounded-md text-sky-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-2 py-1 text-xs bg-theme-elevated hover:bg-theme-surface-hover rounded-md text-theme-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Load content from a file"
             >
                 Load from file
@@ -76,21 +76,21 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
             onChange={(e) => handleWritingStyleChange(e.target.value)}
             disabled={disabled}
             rows={10}
-            className="w-full p-2 bg-slate-600 border border-slate-500 rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500 disabled:opacity-50 placeholder-slate-400 text-sm"
+            className="w-full p-2 input-theme rounded-md disabled:opacity-50 text-sm"
             placeholder="e.g., Use active voice. Be concise. Define acronyms on first use..."
           />
-          <p className="text-xs text-slate-400 mt-1">General rules for voice, tone, grammar, and terminology.</p>
+          <p className="text-xs text-theme-muted mt-1">General rules for voice, tone, grammar, and terminology.</p>
         </div>
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label htmlFor="markdownStyleGuide" className="block text-sm font-medium text-slate-300">
+            <label htmlFor="markdownStyleGuide" className="block text-sm font-medium text-theme-secondary">
               Markdown Style Guide
             </label>
              <button
                 type="button"
                 onClick={() => markdownFileInputRef.current?.click()}
                 disabled={disabled}
-                className="px-2 py-1 text-xs bg-slate-700 hover:bg-slate-600 rounded-md text-sky-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-2 py-1 text-xs bg-theme-elevated hover:bg-theme-surface-hover rounded-md text-theme-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 title="Load content from a file"
             >
                 Load from file
@@ -109,10 +109,10 @@ const GlobalStyleGuideTab: React.FC<GlobalStyleGuideTabProps> = ({ settings, onS
             onChange={(e) => handleMarkdownStyleChange(e.target.value)}
             disabled={disabled}
             rows={10}
-            className="w-full p-2 bg-slate-600 border border-slate-500 rounded-md text-slate-100 focus:ring-sky-500 focus:border-sky-500 disabled:opacity-50 placeholder-slate-400 text-sm"
+            className="w-full p-2 input-theme rounded-md disabled:opacity-50 text-sm"
             placeholder="e.g., Use ATX-style headers (##). Use --- for horizontal rules. Wrap code snippets in triple backticks with a language identifier."
           />
-          <p className="text-xs text-slate-400 mt-1">Specific rules for formatting Markdown content.</p>
+          <p className="text-xs text-theme-muted mt-1">Specific rules for formatting Markdown content.</p>
         </div>
       </div>
     </div>
