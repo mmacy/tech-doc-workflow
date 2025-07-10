@@ -33,7 +33,7 @@ export class GeminiProvider implements LLMProvider {
       });
       return response.text.trim();
     } catch (error) {
-      console.error("Gemini API Error:", error);
+      console.error("Gemini API Error:", error instanceof Error ? error.message : 'Unknown error');
       if (error instanceof Error) {
         const geminiError = error as any;
         if (geminiError.message && geminiError.message.includes('API key not valid')) {
