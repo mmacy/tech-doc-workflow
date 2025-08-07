@@ -7,12 +7,12 @@ Spin up the Tech Doc Workflow app on your machine so you can draft and review do
 - Node.js 18 or later
 - npm (bundled with Node.js)
 
-## Install project files
+## Get the project files
 
 1. Clone the repo or download the source to a folder on your machine
 
     ```bash
-    git clone https://github.com/your-org/tech-doc-workflow.git
+    git clone https://github.com/mmacy/tech-doc-workflow.git
     cd tech-doc-workflow
     ```
 
