@@ -6,7 +6,8 @@ Demonstration of using the [evaluator-optimizer workflow](https://www.anthropic.
 
 ## Prerequisites
 
-- Node.js
+- Node.js 18 or later
+- npm (bundled with Node.js)
 
 ## Workflow roles
 
@@ -17,3 +18,5 @@ Demonstration of using the [evaluator-optimizer workflow](https://www.anthropic.
 1. Install dependencies: `npm install`
 2. Run the app: `npm run dev`
 3. Configure your API keys through the application's settings interface
+
+For detailed setup instructions, see [docs/run-app-locally.md](./docs/run-app-locally.md).
