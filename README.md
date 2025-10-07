@@ -39,30 +39,27 @@ The workflow continues iteratively until all reviewers approve the document or m
 
 ## Installation
 
-### 1. Get the code
+1. Get the code
 
-```shell
-git clone https://github.com/mmacy/tech-doc-workflow.git
-cd tech-doc-workflow
-```
+    ```shell
+    # Clone the repo and enter its directory
+    git clone https://github.com/mmacy/tech-doc-workflow.git
+    cd tech-doc-workflow
+    ```
 
-### 2. Install dependencies
+2. Install dependencies
 
-```shell
-# Install all project dependencies
-npm install
-```
+    ```shell
+    # Install the project's dependencies
+    npm install
+    ```
 
-### 3. Configure environment
+3. Run the app
 
-No environment variables are required. Configure your API keys through the application's settings interface after launching the application.
-
-### 4. Run the app
-
-```shell
-# Start the development server
-npm run dev
-```
+    ```shell
+    # Start the development server
+    npm run dev
+    ```
 
 Navigate to the URL shown in the output, for example `http://127.0.0.1:5173`, and the *Tech Doc Workflow* interface should appear in your browser.
 
