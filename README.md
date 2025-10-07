@@ -2,12 +2,12 @@
 
 A React application that uses AI to automate technical documentation authoring through a multi-role [evaluator-optimizer](https://www.anthropic.com/engineering/building-effective-agents#workflow-evaluator-optimizer) workflow.
 
-*Tech Doc Workflow* implements the collaborative writing and review process by using LLMs to replicate the roles typically seen in professional technical writing scenarios:
+*Tech Doc Workflow* implements the collaborative writing and review process by using an LLM-based agent-like workflow to replicate the roles typically seen in professional technical writing scenarios:
 
-- a **technical writer** who generates and revises content
-- a **technical reviewer** who verifies accuracy against source code
-- an **information architect** who reviews structure and organization
-- and a **technical editor** who ensures grammar and style consistency.
+- **Technical writer** generates and revises content
+- **Technical reviewer** verifies accuracy against source code
+- **Information architect** reviews structure and organization
+- **Technical editor** ensures grammar and style consistency
 
 The workflow continues iteratively until all reviewers approve the document or maximum review cycles are reached.
 
@@ -77,7 +77,7 @@ Navigate to the URL shown in the output, for example `http://127.0.0.1:5173`, an
 
 ## Settings
 
-Except for API keys, Tech Doc Workflow stores its configuration settings in browser local storage and provides the following customization options. API keys are stored ONLY in memory - you must re-enter your key if you close the browser tab or window.
+Except for API keys, *Tech Doc Workflow* stores its configuration settings in browser local storage and provides the following customization options. API keys are stored ONLY in memory - you must re-enter your key if you close the browser tab or window.
 
 - **Custom reviewer guidance**: Modify the instructions given to each AI reviewer role
 - **Global style guides**: Set writing and Markdown formatting standards applied across all document types
