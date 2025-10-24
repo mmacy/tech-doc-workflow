@@ -5,6 +5,7 @@ import AgentSettingsTab from '../components/settings/AgentSettingsTab';
 import DocumentTypeProfilesTab from '../components/settings/DocumentTypeProfilesTab';
 import GlobalStyleGuideTab from '../components/settings/GlobalStyleGuideTab';
 import { LLMProviderTab } from '../components/settings/LLMProviderTab';
+import WorkflowProfilesTab from '../components/settings/WorkflowProfilesTab';
 import { INITIAL_AGENT_SETTINGS } from '../constants';
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -17,7 +18,7 @@ interface SettingsPageProps {
   disabled: boolean; // True if main workflow is processing
 }
 
-type SettingsTab = 'agents' | 'profiles' | 'globalStyle' | 'llmProvider';
+type SettingsTab = 'agents' | 'profiles' | 'globalStyle' | 'llmProvider' | 'workflowProfiles';
 
 const SettingsPage: React.FC<SettingsPageProps> = ({
   agentSettings,
@@ -242,6 +243,16 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
             >
               Global style guidance
             </button>
+            <button
+              onClick={() => setActiveTab('workflowProfiles')}
+              className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
+                ${activeTab === 'workflowProfiles'
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-secondary hover:text-theme-primary hover:border-theme'
+                }`}
+            >
+              Workflow profiles
+            </button>
           </nav>
         </div>
 
@@ -273,6 +284,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                 settings={agentSettings}
                 onSettingsChange={onAgentSettingsChange}
                 disabled={disabled}
+            />
+          )}
+          {activeTab === 'workflowProfiles' && (
+            <WorkflowProfilesTab
+              disabled={disabled}
             />
           )}
         </div>
