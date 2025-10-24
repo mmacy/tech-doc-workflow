@@ -5,6 +5,7 @@ import AgentSettingsTab from '../components/settings/AgentSettingsTab';
 import DocumentTypeProfilesTab from '../components/settings/DocumentTypeProfilesTab';
 import GlobalStyleGuideTab from '../components/settings/GlobalStyleGuideTab';
 import { LLMProviderTab } from '../components/settings/LLMProviderTab';
+import RoleBuilderTab from '../components/settings/RoleBuilderTab';
 import { INITIAL_AGENT_SETTINGS } from '../constants';
 import ConfirmModal from '../components/ConfirmModal';
 
@@ -17,7 +18,7 @@ interface SettingsPageProps {
   disabled: boolean; // True if main workflow is processing
 }
 
-type SettingsTab = 'agents' | 'profiles' | 'globalStyle' | 'llmProvider';
+type SettingsTab = 'agents' | 'profiles' | 'globalStyle' | 'llmProvider' | 'roleBuilder';
 
 const SettingsPage: React.FC<SettingsPageProps> = ({
   agentSettings,
@@ -242,6 +243,16 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
             >
               Global style guidance
             </button>
+            <button
+              onClick={() => setActiveTab('roleBuilder')}
+              className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm
+                ${activeTab === 'roleBuilder'
+                  ? 'border-theme-accent text-theme-accent'
+                  : 'border-transparent text-theme-secondary hover:text-theme-primary hover:border-theme'
+                }`}
+            >
+              Role builder
+            </button>
           </nav>
         </div>
 
@@ -273,6 +284,11 @@ const SettingsPage: React.FC<SettingsPageProps> = ({
                 settings={agentSettings}
                 onSettingsChange={onAgentSettingsChange}
                 disabled={disabled}
+            />
+          )}
+          {activeTab === 'roleBuilder' && (
+            <RoleBuilderTab
+              disabled={disabled}
             />
           )}
         </div>
